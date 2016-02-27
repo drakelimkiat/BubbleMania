@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Level Design View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wj2-BN-k8R">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="gAZ-Gg-KB4" appends="YES" id="SJf-zi-jiH"/>
+                                    <outletCollection property="gestureRecognizers" destination="Jbp-AA-JE6" appends="YES" id="tPV-ME-hgg"/>
+                                    <outletCollection property="gestureRecognizers" destination="y9X-Ni-cPa" appends="YES" id="odi-2Z-WVw"/>
+                                </connections>
+                            </view>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-Pm-7jN">
+                                <rect key="frame" x="0.0" y="967" width="768" height="57"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNT-Ii-C1D">
+                                        <rect key="frame" x="347" y="4" width="75" height="49"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="START">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RGV-x3-VXo"/>
+                                            <segue destination="faN-mZ-ecD" kind="show" identifier="start" id="Do1-L4-q1T"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tal-sg-q3L">
+                                        <rect key="frame" x="610" y="4" width="75" height="49"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="SAVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GF5-ny-1gJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MrX-GK-2x3">
+                                        <rect key="frame" x="0.0" y="4" width="75" height="49"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="RESET">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QAH-5A-7nE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKd-b3-Clg">
+                                        <rect key="frame" x="676" y="4" width="75" height="49"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="LOAD">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="fwF-L3-LGA" kind="show" identifier="load" id="YbC-9A-gVd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3f-UN-KP1">
+                                <rect key="frame" x="0.0" y="867" width="768" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqR-oI-E9x">
+                                        <rect key="frame" x="8" y="12" width="80" height="80"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="blue" image="bubble-blue.png"/>
+                                        <connections>
+                                            <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o2c-8m-ZSz"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL4-fQ-15t">
+                                        <rect key="frame" x="209" y="12" width="80" height="80"/>
+                                        <state key="normal" title="orange" image="bubble-orange.png"/>
+                                        <connections>
+                                            <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaN-3d-7Ay"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rG-vm-Sq6">
+                                        <rect key="frame" x="309" y="12" width="80" height="80"/>
+                                        <state key="normal" title="green" image="bubble-green.png"/>
+                                        <connections>
+                                            <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cFy-Sb-Cx9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbG-6I-CDr">
+                                        <rect key="frame" x="109" y="12" width="80" height="80"/>
+                                        <state key="normal" title="red" image="bubble-red.png"/>
+                                        <connections>
+                                            <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DNF-bU-2Da"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-H0-v6C">
+                                        <rect key="frame" x="412" y="12" width="105" height="80"/>
+                                        <state key="normal" title="empty" image="eraser-1.png"/>
+                                        <connections>
+                                            <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wjy-L8-Olm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.42542109929078015" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="blueBubble" destination="fqR-oI-E9x" id="kQZ-3Q-jeK"/>
+                        <outlet property="eraser" destination="fZF-H0-v6C" id="Xmf-9i-9Ns"/>
+                        <outlet property="gameArea" destination="Wj2-BN-k8R" id="8YA-Ax-4F6"/>
+                        <outlet property="greenBubble" destination="6rG-vm-Sq6" id="3yd-p9-M48"/>
+                        <outlet property="orangeBubble" destination="SL4-fQ-15t" id="AzK-mZ-12r"/>
+                        <outlet property="redBubble" destination="BbG-6I-CDr" id="1r0-rE-XX3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="gAZ-Gg-KB4">
+                    <connections>
+                        <action selector="handlePan:" destination="BYZ-38-t0r" id="WI4-qD-xLu"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="Jbp-AA-JE6">
+                    <connections>
+                        <action selector="handleTap:" destination="BYZ-38-t0r" id="Ofu-9z-Z3d"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="y9X-Ni-cPa">
+                    <connections>
+                        <action selector="handleLongPress:" destination="BYZ-38-t0r" id="QTg-pu-ETJ"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1717" y="149"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="a8p-R0-oOa">
+            <objects>
+                <viewController id="faN-mZ-ecD" customClass="GameViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T2n-3O-8hI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ox3-tv-vSM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YJV-lm-iIb">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lq3-6F-vHe">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y56-z9-tEW">
+                                <rect key="frame" x="324" y="934" width="120" height="180"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Yt2-P4-10P" appends="YES" id="IUx-jC-raV"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="4a3-aL-aip" appends="YES" id="x5W-CQ-UDa"/>
+                            <outletCollection property="gestureRecognizers" destination="8yY-s7-Avg" appends="YES" id="ww0-s4-RWh"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="gameArea" destination="Lq3-6F-vHe" id="9DH-19-Y1R"/>
+                        <outlet property="gameCannon" destination="Y56-z9-tEW" id="wiJ-fz-Hb4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JHy-im-cfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="4a3-aL-aip">
+                    <connections>
+                        <action selector="handleTap:" destination="faN-mZ-ecD" id="dFN-jt-ML2"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="8yY-s7-Avg">
+                    <connections>
+                        <action selector="handlePan:" destination="faN-mZ-ecD" id="Jrb-uP-9CO"/>
+                    </connections>
+                </panGestureRecognizer>
+                <tapGestureRecognizer id="Yt2-P4-10P">
+                    <connections>
+                        <action selector="handleTapOnCannon:" destination="faN-mZ-ecD" id="dny-dQ-ZFp"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1717" y="1585"/>
+        </scene>
+        <!--Level Design Table View Controller-->
+        <scene sceneID="7WA-g8-ymp">
+            <objects>
+                <tableViewController id="fwF-L3-LGA" customClass="LevelDesignTableViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vkr-LY-LEz">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="rRg-Ca-hZ7">
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Saved Level Designs" id="xj3-pd-uuD">
+                                    <barButtonItem key="leftBarButtonItem" title="Cancel" id="FAN-MM-uj1">
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="fwF-L3-LGA" id="aTD-D8-kWe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" title="Load" id="EIs-Hs-hcU">
+                                        <connections>
+                                            <segue destination="jFN-Q2-toy" kind="unwind" unwindAction="unwindToLevelDesigner:" id="D3d-7K-chN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LevelDesignTableViewCell" id="CyA-kr-m6V" customClass="LevelDesignTableViewCell" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CyA-kr-m6V" id="h7G-23-gb4">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trR-yH-ijs">
+                                            <rect key="frame" x="13" y="8" width="747" height="21"/>
+                                            <color key="backgroundColor" red="0.59368916488888868" green="1" blue="0.57145112773319462" alpha="0.76839539007092195" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="trR-yH-ijs" id="c68-Vr-fit"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fwF-L3-LGA" id="x6s-vS-xq3"/>
+                            <outlet property="delegate" destination="fwF-L3-LGA" id="Y3e-Uw-Kto"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="loadButton" destination="EIs-Hs-hcU" id="Fqa-Df-JgE"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P9O-Ve-fXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="jFN-Q2-toy" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-183" y="155"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bubble-blue.png" width="160" height="160"/>
+        <image name="bubble-green.png" width="160" height="160"/>
+        <image name="bubble-orange.png" width="160" height="160"/>
+        <image name="bubble-red.png" width="160" height="160"/>
+        <image name="eraser-1.png" width="254" height="152"/>
+    </resources>
+</document>
