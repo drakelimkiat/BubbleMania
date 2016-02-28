@@ -173,7 +173,8 @@ class BubbleView: UIView {
         }
     }
     
-    // Bubble color cycles between blue -> red -> orange -> green and back to blue
+    // Bubble cycles between blue -> red -> orange -> green ->
+    // bomb -> indestructible -> lightning -> star and back to blue
     func cycleBubble() {
         let bubbleBackground = self.backgroundColor!
         

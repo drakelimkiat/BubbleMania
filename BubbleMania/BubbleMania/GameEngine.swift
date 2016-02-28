@@ -23,13 +23,17 @@ class GameEngine {
         self.bubbleDiameter = bubbleDiameter
     }
     
+    // Gets a random bubble color to set as the next projectile bubble's color
+    // Random bubble colors can only be the basic colors still in the grid (including the current projectile bubble's color)
+    // More information in answers.txt
     func getNextProjectileBubbleColor() -> String {
         var colorArray = [String]()
         let bubbleViewArray = bubbleGrid.bubbleViewArray
         
         for bubbleViewRow in bubbleViewArray {
             for bubbleView in bubbleViewRow {
-                if (bubbleView.color != Constants.bubbleColorString.empty) {
+                if (bubbleView.color != Constants.bubbleColorString.empty &&
+                    bubbleView.color != Constants.bubbleColorString.power) {
                     colorArray.append(bubbleView.color)
                 }
             }
@@ -61,6 +65,7 @@ class GameEngine {
         return (projectileBubble, newProjectileBubbleAngle)
     }
     
+    // Detects if a collision has happened
     func collision(projectileBubble: ProjectileBubbleView) -> Bool {
         // A collision happens if the bubble hits the ceiling
         if (projectileBubble.yPosition <= 0.0) {
@@ -158,6 +163,7 @@ class GameEngine {
         }
     }
     
+    // Returns if the grid is empty. Used to check for end game status
     func isGridEmpty() -> Bool {
         let bubbleViewArray = bubbleGrid.bubbleViewArray
         

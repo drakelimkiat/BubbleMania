@@ -276,9 +276,6 @@
                                 <rect key="frame" x="324" y="934" width="120" height="180"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Yt2-P4-10P" appends="YES" id="IUx-jC-raV"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-ZI-Ubs">
                                 <rect key="frame" x="324" y="975" width="120" height="50"/>

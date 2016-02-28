@@ -39,7 +39,7 @@ class PersistentData {
         }
     }
     
-    // Makes a LevelDesign object with the current grid status, only gets called when user
+    // Makes a LevelDesign object with the bubbleGrid, only gets called when user
     // wants to save the current design
     private func makeLevelDesign(name: String, bubbleGrid: BubbleGrid) -> LevelDesign {
         var gameBubbleArray = [[GameBubble]]()

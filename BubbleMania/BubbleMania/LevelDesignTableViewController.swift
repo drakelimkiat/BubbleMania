@@ -25,7 +25,6 @@ class LevelDesignTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        
         guard levelDesignsArray != nil else {
             levelDesignsArray = [LevelDesign]()
             return
@@ -114,6 +113,8 @@ class LevelDesignTableViewController: UITableViewController {
             }
         }
         
+        // Depending on which preloaded level is chosen, we will load the correct bubbleGrid
+        // onto GameViewController
         if let segueIdentity = segue.identifier {
             let preloadedLevels = PreloadedLevels(gameAreaWidth: self.view.frame.size.width)
             

@@ -31,6 +31,7 @@ class LevelDesignViewController: UIViewController {
     // indicates the index of current LevelDesign if it is a loaded one
     var selectedLevelDesignIndex: Int?
     var persistentData: PersistentData?
+    // indicates if LevelDesignViewController was presented from Main Menu
     var loadedFromMenu = false
 
     override func viewDidLoad() {
@@ -213,6 +214,7 @@ class LevelDesignViewController: UIViewController {
     }
     
     // Checks through the array of levelDesigns to see if name is unique
+    // Empty string is not allowed
     private func isUniqueName(name: String) -> Bool {
         if (name == "") {
             return false
@@ -335,6 +337,7 @@ class LevelDesignViewController: UIViewController {
             let vc = segue.destinationViewController as! LevelDesignTableViewController
             vc.levelDesignsArray = persistentData!.loadLevelDesignArray()
         }
+        // Passes the bubbleGrid to GameViewController if Start button is pressed
         if (segue.identifier == "start") {
             let vc = segue.destinationViewController as! GameViewController
             vc.bubbleGrid = bubbleGrid

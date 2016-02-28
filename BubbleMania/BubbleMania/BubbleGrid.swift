@@ -20,7 +20,6 @@ class BubbleGrid {
         get {
             return bubbleViewArray[row][col]
         }
-        
         set {
             bubbleViewArray[row][col] = newValue
         }
@@ -65,6 +64,8 @@ class BubbleGrid {
     }
     
     // findFloatingCluster makes use of findCluster method
+    // Some optimizations have been made as we now check if a bubble has been marked as
+    // checked before we begin checking for its clusters
     func findFloatingCluster() -> [BubbleView] {
         var floatingBubbles = [BubbleView]()
         resetBubbleViews()
@@ -72,7 +73,7 @@ class BubbleGrid {
         for bubbleRowArray in bubbleViewArray {
             for bubble in bubbleRowArray {
                 if (!bubble.isChecked()) {
-                    if (bubble.color != "empty") {
+                    if (bubble.color != Constants.bubbleColorString.empty) {
                         let bubbleCluster = findCluster(bubble.row!, col: bubble.col!, matchColor: false, reset: true)
                         var touchingTop = false
                         
@@ -91,6 +92,8 @@ class BubbleGrid {
         return floatingBubbles
     }
     
+    // findPowerCluster finds all bubbles that have to be removed
+    // as the result of the projectile bubble touching any power bubbles
     func findPowerCluster(row: Int, col: Int) -> [BubbleView] {
         resetBubbleViews()
         
@@ -188,6 +191,8 @@ class BubbleGrid {
         return neighbouringBubblesOfSameColor
     }
     
+    // Simply checks through the whole grid and outputs an array with the same color
+    // as the target bubble. Used for star bubble special effects
     private func getBubblesOfSameColorInGrid(targetBubbleView: BubbleView) -> [BubbleView] {
         var bubbleArray = [BubbleView]()
         
@@ -204,15 +209,15 @@ class BubbleGrid {
     // Resets the isChecked boolean for all bubbles in BubbleViewArray
     private func resetBubbleViews() {
         
-        for (var i = 0; i < bubbleViewArray.count; i++) {
-            let even = (i % 2) == 0
+        for row in 0..<bubbleViewArray.count {
+            let even = (row % 2) == 0
             
-            for (var j = 0; j < 12; j++) {
-                // Odd rows only have 11 BubbleViews
-                if (!even && j == 11) {
+            for col in 0..<12 {
+                // Odd rowIndexes only have 11 BubbleViews
+                if (!even && col == 11) {
                     break
                 }
-                let bubbleView = bubbleViewArray[i][j]
+                let bubbleView = bubbleViewArray[row][col]
                 bubbleView.resetCheck()
             }
         }

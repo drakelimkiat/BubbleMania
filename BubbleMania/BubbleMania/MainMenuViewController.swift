@@ -29,24 +29,27 @@ class MainMenuViewController: UIViewController {
             vc.levelDesignsArray = persistentData.loadLevelDesignArray()
         }
         
-        // Passes the array of saved level designs to LevelDesignViewController if designLevel button is pressed
+        // Passes the persistentData to LevelDesignViewController if designLevel button is pressed
         if (segue.identifier == "designLevel") {
             let vc = segue.destinationViewController as! LevelDesignViewController
             vc.persistentData = persistentData
         }
     }
     
-    // Once a file has been selected to load, we will load the selectedLevelDesign and store its index
+    // Once a file has been selected to load, we will instantiate a LevelDesignViewController
+    // and present it with the loaded file index stored in the new ViewController
     @IBAction func unwindToLevelDesigner(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? LevelDesignTableViewController {
-                if let levelDesignViewController = storyboard!.instantiateViewControllerWithIdentifier("LevelDesign") as? LevelDesignViewController {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        levelDesignViewController.loadedFromMenu = true
-                        levelDesignViewController.selectedLevelDesignIndex = sourceViewController.selectedLevelDesignIndex
-                        self.presentViewController(levelDesignViewController, animated: true, completion: nil)
-                    })
-                    
-                }
+            
+            if let levelDesignViewController = storyboard!.instantiateViewControllerWithIdentifier("LevelDesign") as? LevelDesignViewController {
+                // dispatch_async function is called so that the MainMenuViewController is loaded first
+                // before we present the LevelDesignViewController
+                dispatch_async(dispatch_get_main_queue(), {
+                    levelDesignViewController.loadedFromMenu = true
+                    levelDesignViewController.selectedLevelDesignIndex = sourceViewController.selectedLevelDesignIndex
+                    self.presentViewController(levelDesignViewController, animated: true, completion: nil)
+                })
+            }
         }
     }
 }

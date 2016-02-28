@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        // Setting up cannon view, and class properties
+        // Setting up cannon view, projectile bubble and class properties
         bubbleDiameter = gameArea.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
         setUpCannon()
         gameEngine = GameEngine(gameAreaWidth: gameArea.frame.size.width, gameAreaHeight: gameArea.frame.size.height, bubbleGrid: bubbleGrid!, bubbleDiameter: bubbleDiameter!)
@@ -89,8 +89,7 @@ class GameViewController: UIViewController {
         view.layer.anchorPoint = anchorPoint
     }
     
-    // Adds a new bubble to be launched at the cannon (current implementation is a default green color)
-    // Color can be changed by tapping on the cannon
+    // Adds a new bubble to be launched at the cannon
     private func addNewProjectileBubble() {
         let intBubbleDiameter = Int(bubbleDiameter!)
         let x = gameArea.frame.size.width / 2 - bubbleDiameter! / 2
@@ -103,9 +102,11 @@ class GameViewController: UIViewController {
         var projectileBubbleColor: String
         
         if let nextProjectileBubble = nextProjectileBubble {
+            
             projectileBubbleColor = nextProjectileBubble.color
             let nextProjectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
             nextProjectileBubble.setBubble(nextProjectileBubbleColor)
+            
         } else {
             projectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
             
@@ -145,7 +146,8 @@ class GameViewController: UIViewController {
         // Only detect collisions when a bubble is launched, and check if we need to remove
         // bubbles when a collision happen
         if (bubbleIsLaunched) {
-            let (newProjectileBubble, newProjectileBubbleAngle) = gameEngine!.getNewProjectileBubblePosition(projectileBubble!, projectileBubbleAngle: projectileBubbleAngle)
+            let (newProjectileBubble, newProjectileBubbleAngle) = gameEngine!.getNewProjectileBubblePosition(
+                projectileBubble!, projectileBubbleAngle: projectileBubbleAngle)
             projectileBubble = newProjectileBubble
             projectileBubbleAngle = newProjectileBubbleAngle
             
@@ -153,6 +155,8 @@ class GameViewController: UIViewController {
                 
                 let (row, col) = gameEngine!.addNewBubble(projectileBubble!)
                 
+                // To find if any bubbles have to be removed when the projectile bubble
+                // touches a power bubble
                 let bubblePowerCluster = bubbleGrid!.findPowerCluster(row, col: col)
                 if (bubblePowerCluster.count > 0) {
                     bubblesToRemove.appendContentsOf(bubblePowerCluster)
@@ -173,6 +177,7 @@ class GameViewController: UIViewController {
             gameEngine!.removeBubblesFromGrid(bubblesToRemove)
         }
         
+        // If grid is empty, we stop the timer and present the EndScreenViewController
         if (gameEngine!.isGridEmpty()) {
             timer?.invalidate()
             if let endScreenViewController = storyboard!.instantiateViewControllerWithIdentifier("EndScreen") as? EndScreenViewController {
@@ -201,7 +206,6 @@ class GameViewController: UIViewController {
     }
     
     // Angle is calculated here by using the point touched on the screen
-    // More detailed explantion in answers.txt
     @IBAction func handleTap(tapRecognizer: UITapGestureRecognizer) {
         let tapRecognizerView = tapRecognizer.view
         let tapPoint = tapRecognizer.locationInView(tapRecognizerView)
@@ -234,12 +238,5 @@ class GameViewController: UIViewController {
         let y = dragPoint.y - gameCannon.center.y
         let angle = atan2(y, x)
         gameCannon.transform = CGAffineTransformMakeRotation(angle + CGFloat(M_PI_2))
-    }
-    
-    // Tap on the cannon to change color
-    @IBAction func handleTapOnCannon(tapRecognizer: UITapGestureRecognizer) {
-        if (!bubbleIsLaunched) {
-         //   projectileBubble!.cycleBubbleColor()
-        }
     }
 }

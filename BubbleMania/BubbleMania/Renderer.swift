@@ -18,7 +18,7 @@ class Renderer {
     private var bubbleIsLaunched = false
     private var bubblesToRemove: [BubbleView]?
     
-    init(bubbleGrid: BubbleGrid, gameAreaFrame: CGRect) {
+    init (bubbleGrid: BubbleGrid, gameAreaFrame: CGRect) {
         self.gameAreaFrame = gameAreaFrame
         self.bubbleGrid = bubbleGrid
     }
