@@ -50,7 +50,7 @@ class Renderer {
                 let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
                 let projectileBubbleView = ProjectileBubbleView(frame: bubbleRect)
                 
-                projectileBubbleView.setBubbleColor(projectileBubble.color)
+                projectileBubbleView.setBubble(projectileBubble.color)
                 gameArea?.addSubview(projectileBubbleView)
             }
         }

@@ -12,8 +12,8 @@ class GameBubble: NSObject, NSCoding {
     
     // MARK: Properties
     
-    internal var xPosition: Int
-    internal var yPosition: Int
+    private(set) var xPosition: Int
+    private(set) var yPosition: Int
     
     // MARK: Types
     
@@ -27,16 +27,6 @@ class GameBubble: NSObject, NSCoding {
     init (xPosition: Int, yPosition: Int) {
         self.xPosition = xPosition
         self.yPosition = yPosition
-    }
-    
-    // MARK: Getter functions
-    
-    func getXPosition() -> Int {
-        return xPosition
-    }
-    
-    func getYPosition() -> Int {
-        return yPosition
     }
     
     // MARK: NSCoding

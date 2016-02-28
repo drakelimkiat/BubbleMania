@@ -67,26 +67,79 @@ class BubbleGrid {
     // findFloatingCluster makes use of findCluster method
     func findFloatingCluster() -> [BubbleView] {
         var floatingBubbles = [BubbleView]()
+        resetBubbleViews()
         
         for bubbleRowArray in bubbleViewArray {
             for bubble in bubbleRowArray {
-                
-                if (bubble.color != "empty") {
-                    let bubbleCluster = findCluster(bubble.row!, col: bubble.col!, matchColor: false, reset: true)
-                    var touchingTop = false
-                    
-                    for clusterBubble in bubbleCluster {
-                        if (clusterBubble.row! == 0) {
-                            touchingTop = true
+                if (!bubble.isChecked()) {
+                    if (bubble.color != "empty") {
+                        let bubbleCluster = findCluster(bubble.row!, col: bubble.col!, matchColor: false, reset: true)
+                        var touchingTop = false
+                        
+                        for clusterBubble in bubbleCluster {
+                            if (clusterBubble.row! == 0) {
+                                touchingTop = true
+                            }
                         }
-                    }
-                    if (!touchingTop) {
-                        floatingBubbles.append(bubble)
+                        if (!touchingTop) {
+                            floatingBubbles.append(bubble)
+                        }
                     }
                 }
             }
         }
         return floatingBubbles
+    }
+    
+    func findPowerCluster(row: Int, col: Int) -> [BubbleView] {
+        resetBubbleViews()
+        
+        var bubblesAffected = [BubbleView]()
+        var newPowerBubblesFound = [BubbleView]()
+        let targetBubbleView = bubbleViewArray[row][col]
+        let targetBubbleViewNeighbours = getNeighbouringBubbles(targetBubbleView)
+        
+        for bubbleView in targetBubbleViewNeighbours {
+            if (bubbleView.power != Constants.specialBubbleString.noPower &&
+                bubbleView.power != Constants.specialBubbleString.indestructible) {
+                newPowerBubblesFound.append(bubbleView)
+                bubblesAffected.append(bubbleView)
+                bubbleView.setCheck()
+            }
+        }
+        
+        if (bubblesAffected.count > 0) {
+            bubblesAffected.append(targetBubbleView)
+            targetBubbleView.setCheck()
+        }
+        
+        while (!newPowerBubblesFound.isEmpty) {
+            let currentPowerBubble = newPowerBubblesFound[0]
+            var newBubblesAffected = [BubbleView]()
+            
+            if (currentPowerBubble.power == Constants.specialBubbleString.bomb) {
+                newBubblesAffected.appendContentsOf(getNeighbouringBubbles(currentPowerBubble))
+            } else if (currentPowerBubble.power == Constants.specialBubbleString.lightning) {
+                newBubblesAffected.appendContentsOf(bubbleViewArray[currentPowerBubble.row!])
+            } else if (currentPowerBubble.power == Constants.specialBubbleString.star) {
+                let bubblesOfSameColorArray = getBubblesOfSameColorInGrid(targetBubbleView)
+                newBubblesAffected.appendContentsOf(bubblesOfSameColorArray)
+            }
+            
+            for bubble in newBubblesAffected {
+                if (!bubblesAffected.contains(bubble) && !bubble.isChecked()) {
+                    bubblesAffected.append(bubble)
+                    bubble.setCheck()
+                    if (bubble.power != Constants.specialBubbleString.noPower &&
+                        bubble.power != Constants.specialBubbleString.indestructible) {
+                            newPowerBubblesFound.append(bubble)
+                    }
+                }
+            }
+            newPowerBubblesFound.removeFirst()
+        }
+        
+        return bubblesAffected
     }
     
     private func getNeighbouringBubbles(targetBubbleView: BubbleView) -> [BubbleView] {
@@ -133,6 +186,19 @@ class BubbleGrid {
             }
         }
         return neighbouringBubblesOfSameColor
+    }
+    
+    private func getBubblesOfSameColorInGrid(targetBubbleView: BubbleView) -> [BubbleView] {
+        var bubbleArray = [BubbleView]()
+        
+        for bubbleRowArray in bubbleViewArray {
+            for bubble in bubbleRowArray {
+                if (bubble.color == targetBubbleView.color) {
+                    bubbleArray.append(bubble)
+                }
+            }
+        }
+        return bubbleArray
     }
     
     // Resets the isChecked boolean for all bubbles in BubbleViewArray

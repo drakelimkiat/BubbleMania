@@ -15,6 +15,10 @@ class LevelDesignViewController: UIViewController {
     @IBOutlet weak var redBubble: UIButton!
     @IBOutlet weak var orangeBubble: UIButton!
     @IBOutlet weak var greenBubble: UIButton!
+    @IBOutlet weak var bombBubble: UIButton!
+    @IBOutlet weak var indestructibleBubble: UIButton!
+    @IBOutlet weak var lightningBubble: UIButton!
+    @IBOutlet weak var starBubble: UIButton!
     @IBOutlet weak var eraser: UIButton!
     
     // MARK: Properties
@@ -215,7 +219,7 @@ class LevelDesignViewController: UIViewController {
         }
         
         for levelDesign in persistentData!.levelDesignArray {
-            if (levelDesign.getName() == name) {
+            if (levelDesign.name == name) {
                 return false
             }
         }
@@ -263,7 +267,7 @@ class LevelDesignViewController: UIViewController {
         
         if let bubbleView = possibleBubbleView {
             if let selectedButtonTitle = selectedButton?.currentTitle {
-                bubbleView.setBubbleColor(selectedButtonTitle)
+                bubbleView.setBubble(selectedButtonTitle)
             }
         }
     }
@@ -281,9 +285,9 @@ class LevelDesignViewController: UIViewController {
                 if (selectedButtonTitle == "empty") {
                     bubbleView.clearBubble()
                 } else if (bubbleView.backgroundColor == emptyColor) {
-                    bubbleView.setBubbleColor(selectedButtonTitle)
+                    bubbleView.setBubble(selectedButtonTitle)
                 } else {
-                    bubbleView.cycleBubbleColor()
+                    bubbleView.cycleBubble()
                 }
             }
         }
@@ -302,7 +306,7 @@ class LevelDesignViewController: UIViewController {
     
     // Loads a LevelDesign that the user has specified to load
     private func loadSelectedLevelDesign(selectedLevelDesign: LevelDesign) {
-        let gameBubbleArray = selectedLevelDesign.getGameBubbleArray()
+        let gameBubbleArray = selectedLevelDesign.gameBubbleArray
         
         for row in 0..<9 {
             let even = (row % 2) == 0
@@ -314,7 +318,12 @@ class LevelDesignViewController: UIViewController {
                 
                 let basicBubble = gameBubbleArray[row][col] as! BasicBubble
                 let bubbleView = bubbleGrid![row, col]
-                bubbleView.setBubbleColor(basicBubble.getBubbleColor())
+                
+                if (basicBubble.bubblePower == Constants.specialBubbleString.noPower) {
+                    bubbleView.setBubble(basicBubble.bubbleColor)
+                } else {
+                    bubbleView.setBubble(basicBubble.bubblePower)
+                }
                 bubbleGrid![row, col] = bubbleView
             }
         }

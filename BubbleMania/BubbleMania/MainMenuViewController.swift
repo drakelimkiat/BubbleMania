@@ -39,7 +39,7 @@ class MainMenuViewController: UIViewController {
     // Once a file has been selected to load, we will load the selectedLevelDesign and store its index
     @IBAction func unwindToLevelDesigner(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.sourceViewController as? LevelDesignTableViewController {
-                if let levelDesignViewController = storyboard!.instantiateViewControllerWithIdentifier("LevelDesignView") as? LevelDesignViewController {
+                if let levelDesignViewController = storyboard!.instantiateViewControllerWithIdentifier("LevelDesign") as? LevelDesignViewController {
                     dispatch_async(dispatch_get_main_queue(), {
                         levelDesignViewController.loadedFromMenu = true
                         levelDesignViewController.selectedLevelDesignIndex = sourceViewController.selectedLevelDesignIndex

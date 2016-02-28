@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
     var currentView: UIView?
     var bubbleRemoved = true
     var bubbleDiameter: CGFloat?
+    var timer: NSTimer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +43,7 @@ class GameViewController: UIViewController {
         self.view.sendSubviewToBack(gameArea)
         
         // Timer that will be called every 1/60 seconds to update the UIView
-        let _ = NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: "getNewView", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: "getNewView", userInfo: nil, repeats: true)
         
     }
     
@@ -104,7 +105,7 @@ class GameViewController: UIViewController {
         if let nextProjectileBubble = nextProjectileBubble {
             projectileBubbleColor = nextProjectileBubble.color
             let nextProjectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
-            nextProjectileBubble.setBubbleColor(nextProjectileBubbleColor)
+            nextProjectileBubble.setBubble(nextProjectileBubbleColor)
         } else {
             projectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
             
@@ -117,12 +118,12 @@ class GameViewController: UIViewController {
             let nextProjectileBubbleView = ProjectileBubbleView(frame: bubbleRect)
             let nextProjectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
             
-            nextProjectileBubbleView.setBubbleColor(nextProjectileBubbleColor)
+            nextProjectileBubbleView.setBubble(nextProjectileBubbleColor)
             nextBubbleView.addSubview(nextProjectileBubbleView)
             nextProjectileBubble = nextProjectileBubbleView
         }
         
-        projectileBubbleView.setBubbleColor(projectileBubbleColor)
+        projectileBubbleView.setBubble(projectileBubbleColor)
         self.view.addSubview(projectileBubbleView)
         projectileBubble = projectileBubbleView
     }
@@ -134,7 +135,7 @@ class GameViewController: UIViewController {
         var bubblesToRemove = [BubbleView]()
         
         // Only check for floating clusters when a bubble has been removed
-        // bubbleRemoved set to true at the start to remove and floating cluster at the start of the game
+        // bubbleRemoved set to true at the start to remove any floating clusters at the start of the game
         if (bubbleRemoved) {
             let floatingCluster = bubbleGrid!.findFloatingCluster()
             bubblesToRemove.appendContentsOf(floatingCluster)
@@ -151,6 +152,13 @@ class GameViewController: UIViewController {
             if (gameEngine!.collision(projectileBubble!)) {
                 
                 let (row, col) = gameEngine!.addNewBubble(projectileBubble!)
+                
+                let bubblePowerCluster = bubbleGrid!.findPowerCluster(row, col: col)
+                if (bubblePowerCluster.count > 0) {
+                    bubblesToRemove.appendContentsOf(bubblePowerCluster)
+                    bubbleRemoved = true
+                }
+                
                 let bubbleClusterWithSameColor = bubbleGrid!.findCluster(row, col: col, matchColor: true, reset: true)
                 if (bubbleClusterWithSameColor.count > 2) {
                     bubblesToRemove.appendContentsOf(bubbleClusterWithSameColor)
@@ -163,6 +171,13 @@ class GameViewController: UIViewController {
         
         if (!bubblesToRemove.isEmpty) {
             gameEngine!.removeBubblesFromGrid(bubblesToRemove)
+        }
+        
+        if (gameEngine!.isGridEmpty()) {
+            timer?.invalidate()
+            if let endScreenViewController = storyboard!.instantiateViewControllerWithIdentifier("EndScreen") as? EndScreenViewController {
+                self.presentViewController(endScreenViewController, animated: true, completion: nil)
+            }
         }
         
         // Update the UIView with the new properties
@@ -224,7 +239,7 @@ class GameViewController: UIViewController {
     // Tap on the cannon to change color
     @IBAction func handleTapOnCannon(tapRecognizer: UITapGestureRecognizer) {
         if (!bubbleIsLaunched) {
-            projectileBubble!.cycleBubbleColor()
+         //   projectileBubble!.cycleBubbleColor()
         }
     }
 }

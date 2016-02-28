@@ -60,7 +60,7 @@ class LevelDesignTableViewController: UITableViewController {
         
         // Fetches the appropriate LevelDesign for the data source layout.
         let levelDesign = levelDesignsArray![indexPath.row]
-        cell.nameLabel.text = levelDesign.getName()
+        cell.nameLabel.text = levelDesign.name
         return cell
     }
     

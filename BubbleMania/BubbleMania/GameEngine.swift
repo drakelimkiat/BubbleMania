@@ -113,7 +113,7 @@ class GameEngine {
         }
         
         let bubbleView = bubbleViewArray[row][col]
-        bubbleView.setBubbleColor(projectileBubble.color)
+        bubbleView.setBubble(projectileBubble.color)
         bubbleGrid.bubbleViewArray = bubbleViewArray
         return (row, col)
     }
@@ -154,7 +154,20 @@ class GameEngine {
         for bubble in bubbleArray {
             let row = bubble.row!
             let col = bubble.col!
-            bubbleViewArray[row][col].setBubbleColor("empty")
+            bubbleViewArray[row][col].setBubble(Constants.bubbleColorString.empty)
         }
+    }
+    
+    func isGridEmpty() -> Bool {
+        let bubbleViewArray = bubbleGrid.bubbleViewArray
+        
+        for bubbleViewRow in bubbleViewArray {
+            for bubbleView in bubbleViewRow {
+                if (bubbleView.color != Constants.bubbleColorString.empty) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }

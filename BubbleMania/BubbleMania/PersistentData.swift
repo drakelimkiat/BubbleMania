@@ -21,7 +21,7 @@ class PersistentData {
     
     func saveLevelDesign(name: String, bubbleGrid: BubbleGrid, selectedLevelDesignIndex: Int) {
         if (selectedLevelDesignIndex >= 0) {
-            let selectedLevelDesignName = levelDesignArray[selectedLevelDesignIndex].getName()
+            let selectedLevelDesignName = levelDesignArray[selectedLevelDesignIndex].name
             let levelDesign = makeLevelDesign(selectedLevelDesignName, bubbleGrid: bubbleGrid)
             levelDesignArray[selectedLevelDesignIndex] = levelDesign
         } else {
@@ -57,8 +57,9 @@ class PersistentData {
                 let bubbleXPosition = Int(bubbleView.frame.origin.x)
                 let bubbleYPosition = Int(bubbleView.frame.origin.y)
                 let bubbleColor = bubbleView.color
+                let bubblePower = bubbleView.power
                 let basicBubble = BasicBubble(xPosition: bubbleXPosition,
-                    yPosition: bubbleYPosition, bubbleColor: bubbleColor)
+                    yPosition: bubbleYPosition, bubbleColor: bubbleColor, bubblePower: bubblePower)
                 rowGameBubbleArray.append(basicBubble)
             }
             gameBubbleArray.append(rowGameBubbleArray)

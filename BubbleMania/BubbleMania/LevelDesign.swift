@@ -12,8 +12,8 @@ class LevelDesign: NSObject, NSCoding {
     
     // MARK: Properties
     
-    private var name: String
-    private var gameBubbleArray: [[GameBubble]]
+    private(set) var name: String
+    private(set) var gameBubbleArray: [[GameBubble]]
     
     // MARK: Archiving Paths
     
@@ -50,13 +50,4 @@ class LevelDesign: NSObject, NSCoding {
         // Must call designated initializer.
         self.init(name: name, gameBubbleArray: gameBubbleArray)
     }
-    
-    func getGameBubbleArray() -> [[GameBubble]] {
-        return gameBubbleArray
-    }
-    
-    func getName() -> String {
-        return name
-    }
-
 }

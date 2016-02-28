@@ -24,5 +24,20 @@ struct Constants {
         static let orange = "orange"
         static let green = "green"
         static let empty = "empty"
+        static let power = "power"
+    }
+    
+    struct specialBubbleString {
+        static let bomb = "bomb"
+        static let indestructible = "indestructible"
+        static let lightning = "lightning"
+        static let star = "star"
+        static let noPower = "noPower"
+    }
+    
+    struct preloadedLevels {
+        static let easy = 1
+        static let medium = 4
+        static let hard = 9
     }
 }
