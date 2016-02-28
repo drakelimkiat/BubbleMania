@@ -62,7 +62,15 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 # Problem 7: Testing #
 ######################
 
-- Test implementation of buttons and alerts:
+- Test implementation of buttons in MainMenuView:
+
+	- Pressing Select Level Button:
+		- A table view gets loaded with the saved files in there, along with 3 preloaded levels
+
+	- Pressing Design Level Button:
+		- The LevelDesignerView gets loaded
+
+- Test implementation of buttons and alerts in LevelDesignerView:
 
 	- Pressing palette buttons:
 		- When application is first started. Expected behaviour: All palette buttons are translucent.
@@ -86,7 +94,7 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 
 	- Saving a new file:
 		- Saving an empty LevelDesign. Expected behaviour: Allows you to save if name has not been used before
-		- Saving a LevelDesign with empty string as name. Expected behaviour: Allows you to save if empty string has not been used as name before
+		- Saving a LevelDesign with empty string as name. Expected behaviour: Does not allow you to save
 		- Saving a LevelDesign with a name that has been used before. Expected behaviour: Alert pops up with appropriate message, LevelDesign not saved.
 
 	- Loading a file:
@@ -101,12 +109,10 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 
 
 - Test implementation of Level Designer:
-	
-	- Tapping GameArea with bubbles and without bubbles with no selection in palette. Expected behaviour: Nothing happens, no error occurs.
 
-	- Tapping GameArea with bubbles with a coloured bubble selected in palette:
-		- Bubble was previously empty. Expected behaviour: Bubble becomes filled with the selected colour
-		- Bubble was previously already coloured. Expected behaviour: Bubble colour cycles from blue -> red -> orange -> green and back to blue
+	- Tapping GameArea with bubbles with a coloured bubble or special bubble selected in palette:
+		- Bubble was previously empty. Expected behaviour: Bubble becomes filled with the selected colour or special effect
+		- Bubble was previously already coloured. Expected behaviour: Bubble colour cycles from blue -> red -> orange -> green -> bomb -> indestructible -> lightning -> star and back to blue
 
 	- Tapping GameArea without bubbles with a coloured bubble or eraser selected in palette. Expected behaviour: Nothing happens, no error occurs.
 
@@ -114,13 +120,11 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 		- Bubble was previously empty. Expected behaviour: Bubble remains empty
 		- Bubble was previously coloured. Expected behaviour: Bubble is now empty
 
-	- Long-tapping GameArea with bubbles with any selection or no selection in palette:
+	- Long-tapping GameArea with bubbles with any selection in palette:
 		- Bubble was previously empty. Expected behaviour: Bubble remains empty
 		- Bubble was previously coloured. Expected behaviour: Bubble is now empty
 
-	- Long-tapping GameArea without bubbles with any selection or no selection in palette. Expected behaviour: Nothing happens, no error occurs.
-
-	- Dragging over GameArea with or without bubbles with no selection in palette. Expected behaviour: Nothing happens, no error occurs.
+	- Long-tapping GameArea without bubbles with any selection in palette. Expected behaviour: Nothing happens, no error occurs.
 
 	- Dragging over GameArea with bubbles with a selection in palette. Expected behaviour: All bubbles which has been dragged over will either become coloured or empty depending on selection in palette
 
@@ -128,7 +132,9 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 
 
 - Test implementation of launching a projectile bubble:
-	- When user taps on the screen, the projectile bubble with the correct color gets launched in the correct direction
+	- New projectile bubbles can only be bubbles with the default colors (red, orange, green, blue)
+	- When user taps on the screen, the projectile bubble with the correct color gets launched in the correct direction (where the screen has been tapped), the cannon also faces in the correct direction
+	- When user pans on the screen, the cannon follows and faces in the pan direction
 	- When a bubble is launched and has not yet collided, a new projectile bubble will not appear for user to launch
 	- When projectile bubble collides with the ceiling or any other bubbles in the game, it snaps into position, and a new projectile bubble is ready for launch
 
@@ -145,6 +151,12 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 	- When a bubble snaps into position and is not clustered with more than 2 bubbles of the same color, it simply remains there
 	- When a bubble snaps into position and is clustered with more than 2 bubbles of the same color, all the bubbles with the same color disappears (no animation done due to time constraints)
 	- When a cluster of bubbles has been removed, any floating bubbles will also disappear
+
+- Test implementation of special bubbles
+	- When the projectile bubble touches a lightning bubble, all bubbles in the row gets removed
+	- When the projectile bubble touches a bomb bubble, all neighbouring/adjacent bubbles gets removed
+	- When the projectile bubble touches a star bubble, all bubbles in the grid with the same color as the projectile bubble gets removed
+	- When an indestructible bubble is floating, it gets removed. Any other situations will not result in indestructible bubble getting removed
 
 
 ###################################
