@@ -8,7 +8,7 @@
         <!--Level Design View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LevelDesignViewController" customModule="BubbleMania" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -37,7 +37,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RGV-x3-VXo"/>
                                             <segue destination="faN-mZ-ecD" kind="show" identifier="start" id="Do1-L4-q1T"/>
                                         </connections>
                                     </button>
@@ -85,28 +84,28 @@
                                             <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o2c-8m-ZSz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL4-fQ-15t">
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SL4-fQ-15t">
                                         <rect key="frame" x="209" y="12" width="80" height="80"/>
                                         <state key="normal" title="orange" image="bubble-orange.png"/>
                                         <connections>
                                             <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JaN-3d-7Ay"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rG-vm-Sq6">
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rG-vm-Sq6">
                                         <rect key="frame" x="309" y="12" width="80" height="80"/>
                                         <state key="normal" title="green" image="bubble-green.png"/>
                                         <connections>
                                             <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cFy-Sb-Cx9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbG-6I-CDr">
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BbG-6I-CDr">
                                         <rect key="frame" x="109" y="12" width="80" height="80"/>
                                         <state key="normal" title="red" image="bubble-red.png"/>
                                         <connections>
                                             <action selector="paletteButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DNF-bU-2Da"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-H0-v6C">
+                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZF-H0-v6C">
                                         <rect key="frame" x="412" y="12" width="105" height="80"/>
                                         <state key="normal" title="empty" image="eraser-1.png"/>
                                         <connections>
@@ -151,7 +150,7 @@
         <!--Game View Controller-->
         <scene sceneID="a8p-R0-oOa">
             <objects>
-                <viewController id="faN-mZ-ecD" customClass="GameViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="faN-mZ-ecD" customClass="GameViewController" customModule="BubbleMania" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T2n-3O-8hI"/>
                         <viewControllerLayoutGuide type="bottom" id="Ox3-tv-vSM"/>
@@ -173,6 +172,10 @@
                                     <outletCollection property="gestureRecognizers" destination="Yt2-P4-10P" appends="YES" id="IUx-jC-raV"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-ZI-Ubs">
+                                <rect key="frame" x="324" y="975" width="120" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -181,6 +184,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="cannonBase" destination="AQc-ZI-Ubs" id="MKq-TI-uLc"/>
                         <outlet property="gameArea" destination="Lq3-6F-vHe" id="9DH-19-Y1R"/>
                         <outlet property="gameCannon" destination="Y56-z9-tEW" id="wiJ-fz-Hb4"/>
                     </connections>
@@ -207,7 +211,7 @@
         <!--Level Design Table View Controller-->
         <scene sceneID="7WA-g8-ymp">
             <objects>
-                <tableViewController id="fwF-L3-LGA" customClass="LevelDesignTableViewController" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fwF-L3-LGA" customClass="LevelDesignTableViewController" customModule="BubbleMania" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="vkr-LY-LEz">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,7 +235,7 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LevelDesignTableViewCell" id="CyA-kr-m6V" customClass="LevelDesignTableViewCell" customModule="BubbleMania_temp_caseinsensitive_rename" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LevelDesignTableViewCell" id="CyA-kr-m6V" customClass="LevelDesignTableViewCell" customModule="BubbleMania" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CyA-kr-m6V" id="h7G-23-gb4">

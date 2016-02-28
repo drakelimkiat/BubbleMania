@@ -41,16 +41,16 @@ class Renderer {
         
         if let projectileBubble = self.projectileBubble {
             if (bubbleIsLaunched) {
-                let x = CGFloat(projectileBubble.getXPosition())
-                let y = CGFloat(projectileBubble.getYPosition())
-                let bubbleDiameter = gameArea!.frame.size.width/12
+                let x = CGFloat(projectileBubble.xPosition)
+                let y = CGFloat(projectileBubble.yPosition)
+                let bubbleDiameter = gameArea!.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
                 let intBubbleDiameter = Int(bubbleDiameter)
                 let bubblePoint = CGPoint(x: x, y: y)
                 let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
                 let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
                 let projectileBubbleView = ProjectileBubbleView(frame: bubbleRect)
                 
-                projectileBubbleView.setBubbleColor(projectileBubble.getColor())
+                projectileBubbleView.setBubbleColor(projectileBubble.color)
                 gameArea?.addSubview(projectileBubbleView)
             }
         }
@@ -72,17 +72,17 @@ class Renderer {
     }
     
     private func setUpGrid() {
-        for (var i = 0; i < bubbleViewArray.count; i++) {
-            let even = (i % 2) == 0
+        for row in 0..<bubbleViewArray.count {
+            let even = (row % 2) == 0
             
-            for (var j = 0; j < 12; j++) {
+            for col in 0..<12 {
                 // Odd rows only have 11 BubbleViews
-                if (!even && j == 11) {
+                if (!even && col == 11) {
                     break
                 }
-                let bubbleView = bubbleViewArray[i][j]
+                let bubbleView = bubbleViewArray[row][col]
                 // We will not draw the bubble if its an empty one
-                if (bubbleView.getColor() != "empty") {
+                if (bubbleView.color != "empty") {
                     gameArea!.addSubview(bubbleView)
                 }
             }

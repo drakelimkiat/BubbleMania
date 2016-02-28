@@ -12,6 +12,7 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var gameArea: UIView!
     @IBOutlet weak var gameCannon: UIView!
+    @IBOutlet weak var cannonBase: UIView!
     var bubbleViewArray = [[BubbleView]]()
     var projectileBubble: ProjectileBubbleView?
     var projectileBubbleAngle = CGFloat(0)
@@ -20,22 +21,25 @@ class GameViewController: UIViewController {
     var renderer: Renderer?
     var currentView: UIView?
     var bubbleRemoved = true
+    var bubbleDiameter: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         // Setting up cannon view, and class properties
+        bubbleDiameter = gameArea.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
         setUpCannon()
         addNewProjectileBubble()
-        physicsEngine = PhysicsEngine(leftWall: 0.0, rightWall: Double(gameArea.frame.width), ceiling: 0.0,
-            floor: Double(gameArea.frame.height))
+        physicsEngine = PhysicsEngine(leftWall: 0.0, rightWall: gameArea.frame.width, ceiling: 0.0,
+            floor: gameArea.frame.height)
         
         // Adding the first frame of UIView
         renderer = Renderer(bubbleViewArray: bubbleViewArray, gameAreaFrame: gameArea.frame)
         currentView = renderer!.render()
         self.view.addSubview(currentView!)
         self.view.bringSubviewToFront(gameCannon)
+        self.view.bringSubviewToFront(cannonBase)
         self.view.bringSubviewToFront(projectileBubble!)
         
         // Timer that will be called every 1/60 seconds to update the UIView
@@ -49,13 +53,20 @@ class GameViewController: UIViewController {
     }
     
     private func setUpCannon() {
-        let cannonImage = UIImage(named: "cannon.png")
+        let cannonImage = UIImage(named: "cannon_1.png")
         let cannon = UIImageView(image: cannonImage)
         let cannonWidth = gameCannon.frame.size.width
         let cannonHeight = gameCannon.frame.size.height
         cannon.frame = CGRectMake(0, 0, cannonWidth, cannonHeight)
         setAnchorPoint(CGPointMake(0.5, 1), view: gameCannon)
         self.gameCannon.addSubview(cannon)
+        
+        let cannonBaseImage = UIImage(named: "cannon-base.png")
+        let base = UIImageView(image: cannonBaseImage)
+        let baseWidth = cannonBase.frame.size.width
+        let baseHeight = cannonBase.frame.size.height
+        base.frame = CGRectMake(0, 0, baseWidth, baseHeight)
+        self.cannonBase.addSubview(base)
     }
     
     // This method is used to set the anchor point of a UIView which it rotates at
@@ -69,21 +80,20 @@ class GameViewController: UIViewController {
         var position : CGPoint = view.layer.position
         
         position.x -= oldPoint.x
-        position.x += newPoint.x;
+        position.x += newPoint.x
         
-        position.y -= oldPoint.y;
-        position.y += newPoint.y;
+        position.y -= oldPoint.y
+        position.y += newPoint.y
         
-        view.layer.position = position;
-        view.layer.anchorPoint = anchorPoint;
+        view.layer.position = position
+        view.layer.anchorPoint = anchorPoint
     }
     
     // Adds a new bubble to be launched at the cannon (current implementation is a default green color)
     // Color can be changed by tapping on the cannon
     private func addNewProjectileBubble() {
-        let bubbleDiameter = gameArea.frame.size.width/12
-        let intBubbleDiameter = Int(bubbleDiameter)
-        let x = gameArea.frame.size.width / 2 - bubbleDiameter / 2
+        let intBubbleDiameter = Int(bubbleDiameter!)
+        let x = gameArea.frame.size.width / 2 - bubbleDiameter! / 2
         let y = CGFloat(940)
         
         let bubblePoint = CGPoint(x: x, y: y)
@@ -114,7 +124,7 @@ class GameViewController: UIViewController {
         // bubbles when a collision happen
         if (bubbleIsLaunched) {
             getNewProjectileBubblePosition()
-            if (collision() == true) {
+            if (collision()) {
                 let (row, col) = addNewBubble()
                 let bubbleClusterWithSameColor = findCluster(row, col: col, matchColor: true, reset: true)
                 if (bubbleClusterWithSameColor.count > 2) {
@@ -135,6 +145,7 @@ class GameViewController: UIViewController {
         currentView = renderer!.render()
         self.view.addSubview(currentView!)
         self.view.bringSubviewToFront(gameCannon)
+        self.view.bringSubviewToFront(cannonBase)
         if let projectileBubble = projectileBubble {
             self.view.bringSubviewToFront(projectileBubble)
         }
@@ -142,34 +153,33 @@ class GameViewController: UIViewController {
     
     // Uses the physicsEngine to calculate next position
     private func getNewProjectileBubblePosition() {
-        let xPosition = Double(projectileBubble!.getXPosition())
-        let yPosition = Double(projectileBubble!.getYPosition())
-        let bubbleDiameter = Double(gameArea.frame.size.width/12)
-        let vector = physicsEngine!.getNextPosition(xPosition, y: yPosition, width: bubbleDiameter, height: bubbleDiameter,
-            angle: Double(projectileBubbleAngle), velocity: 10)
+        let xPosition = projectileBubble!.xPosition
+        let yPosition = projectileBubble!.yPosition
+        let vector = physicsEngine!.getNextPosition(xPosition, y: yPosition, width: bubbleDiameter!, height: bubbleDiameter!,
+            angle: Double(projectileBubbleAngle), velocity: Constants.numbers.bubbleVelocity)
         
-        projectileBubble?.setXPosition(CGFloat(vector.xPosition))
-        projectileBubble?.setYPosition(CGFloat(vector.yPosition))
+        projectileBubble?.xPosition = vector.xPosition
+        projectileBubble?.yPosition = vector.yPosition
         projectileBubbleAngle = CGFloat(vector.angle)
     }
     
     private func collision() -> Bool {
         // A collision happens if the bubble hits the ceiling
-        if (projectileBubble?.getYPosition() <= 0.0) {
+        if (projectileBubble?.yPosition <= 0.0) {
             return true
         }
         
-        let radius = gameArea.frame.size.width/24
+        let radius = bubbleDiameter! / 2
         
         // For each bubbleView, check if the projectile bubble and the bubbles intersect using physicsEngine
         for bubbleViewRow in bubbleViewArray {
             for bubbleView in bubbleViewRow {
                 
-                if (bubbleView.getColor() != "empty") {
+                if (bubbleView.color != "empty") {
                     let bubbleViewX = Double(bubbleView.frame.origin.x + radius)
                     let bubbleViewY = Double(bubbleView.frame.origin.y + radius)
-                    let projectileBubbleViewX = Double(projectileBubble!.getXPosition() + radius)
-                    let projectileBubbleViewY = Double(projectileBubble!.getYPosition() + radius)
+                    let projectileBubbleViewX = Double(projectileBubble!.xPosition + radius)
+                    let projectileBubbleViewY = Double(projectileBubble!.yPosition + radius)
                     
                     if (physicsEngine!.circleIntersection(bubbleViewX, y1: bubbleViewY, r1: Double(radius), x2: projectileBubbleViewX, y2: projectileBubbleViewY, r2: Double(radius))) {
                         return true
@@ -182,16 +192,15 @@ class GameViewController: UIViewController {
     
     // Add new bubble to BubbleViewArray when a collision happens
     private func addNewBubble() -> (Int, Int) {
-        let diameter = gameArea.frame.size.width/12
-        let projectileBubbleViewX = projectileBubble!.getXPosition() + diameter / 2
-        let projectileBubbleViewY = projectileBubble!.getYPosition() + diameter / 2
-        let row = Int(floor(projectileBubbleViewY / (diameter - 9)))
+        let projectileBubbleViewX = projectileBubble!.xPosition + bubbleDiameter! / 2
+        let projectileBubbleViewY = projectileBubble!.yPosition + bubbleDiameter! / 2
+        let row = Int(floor(projectileBubbleViewY / (bubbleDiameter! - CGFloat(Constants.numbers.overlappingPixelsPerRow))))
         var col = 0
         
         if (row % 2 == 0) {
-            col = Int(floor(projectileBubbleViewX / diameter))
+            col = Int(floor(projectileBubbleViewX / bubbleDiameter!))
         } else {
-            col = Int(floor((projectileBubbleViewX - (diameter / 2)) / diameter))
+            col = Int(floor((projectileBubbleViewX - (bubbleDiameter! / 2)) / bubbleDiameter!))
         }
         
         var numberOfRows = bubbleViewArray.count
@@ -203,14 +212,13 @@ class GameViewController: UIViewController {
         }
         
         let bubbleView = bubbleViewArray[row][col]
-        bubbleView.setBubbleColor((projectileBubble?.getColor())!)
+        bubbleView.setBubbleColor((projectileBubble?.color)!)
         return (row, col)
     }
     
     // Additional rows have to be added to BubbleViewArray if the row that the new bubble snaps to is greater than 9
     private func addNewRow(row: Int) -> [BubbleView] {
-        let bubbleDiameter = gameArea.frame.size.width/12
-        let intBubbleDiameter = Int(bubbleDiameter)
+        let intBubbleDiameter = Int(bubbleDiameter!)
         var bubbleArray = [BubbleView]()
         let even = (row % 2) == 0
         var startingXPosition = 0
@@ -222,16 +230,16 @@ class GameViewController: UIViewController {
             startingXPosition = intBubbleDiameter / 2
         }
         
-        for (var j = 0; j < 12; j++) {
-            // Odd rows only have 11 BubbleViews
-            if (!even && j == 11) {
+        for col in 0..<12 {
+            // Odd rowIndexes only have 11 BubbleViews
+            if (!even && col == 11) {
                 break
             }
             
-            let bubblePoint = CGPoint(x: startingXPosition + (j * intBubbleDiameter), y: yPosition)
+            let bubblePoint = CGPoint(x: startingXPosition + (col * intBubbleDiameter), y: yPosition)
             let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
             let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
-            let bubbleView = BubbleView(frame: bubbleRect, row: row, col: j)
+            let bubbleView = BubbleView(frame: bubbleRect, row: row, col: col)
             bubbleArray.append(bubbleView)
         }
         return bubbleArray
@@ -254,7 +262,7 @@ class GameViewController: UIViewController {
             let currentBubbleView = unvisitedBubbles.removeLast()
             var neighbouringBubbles = [BubbleView]()
             
-            if (currentBubbleView.getColor() == "empty") {
+            if (currentBubbleView.color == "empty") {
                 continue
             }
             
@@ -281,13 +289,13 @@ class GameViewController: UIViewController {
         
         for bubbleRowArray in bubbleViewArray {
             for bubble in bubbleRowArray {
-                
-                if (bubble.getColor() != "empty") {
-                    let bubbleCluster = findCluster(bubble.getRow(), col: bubble.getCol(), matchColor: false, reset: true)
+
+                if (bubble.color != "empty") {
+                    let bubbleCluster = findCluster(bubble.row!, col: bubble.col!, matchColor: false, reset: true)
                     var touchingTop = false
                     
                     for clusterBubble in bubbleCluster {
-                        if (clusterBubble.getRow() == 0) {
+                        if (clusterBubble.row! == 0) {
                             touchingTop = true
                         }
                     }
@@ -305,8 +313,8 @@ class GameViewController: UIViewController {
         [[-1, 0], [-1, 1], [0, -1], [0, 1], [1, 0], [1, 1]]]  // Odd row
     
     private func getNeighbouringBubbles(targetBubbleView: BubbleView) -> [BubbleView] {
-        let row = targetBubbleView.getRow()
-        let col = targetBubbleView.getCol()
+        let row = targetBubbleView.row!
+        let col = targetBubbleView.col!
         var neighbours = [BubbleView]()
         var neighboursOffset = [[Int]]()
         
@@ -324,7 +332,7 @@ class GameViewController: UIViewController {
                 let bubbleRowArray = bubbleViewArray[currentRow]
                 if (currentCol > -1 && currentCol < bubbleRowArray.count) {
                     let currentBubbleView = bubbleRowArray[currentCol]
-                    if (currentBubbleView.getColor() != "empty") {
+                    if (currentBubbleView.color != "empty") {
                         neighbours.append(currentBubbleView)
                     }
                 }
@@ -339,7 +347,7 @@ class GameViewController: UIViewController {
         var neighbouringBubblesOfSameColor = [BubbleView]()
         
         for bubble in neighbouringBubbles {
-            if (bubble.getColor() == targetBubbleView.getColor()) {
+            if (bubble.color == targetBubbleView.color) {
                 neighbouringBubblesOfSameColor.append(bubble)
             }
         }
@@ -365,8 +373,8 @@ class GameViewController: UIViewController {
     // "Removes" a bubble from BubbleViewArray by setting the color as "empty"
     private func removeBubblesFromArray(bubbleArray: [BubbleView]) {
         for bubble in bubbleArray {
-            let row = bubble.getRow()
-            let col = bubble.getCol()
+            let row = bubble.row!
+            let col = bubble.col!
             bubbleViewArray[row][col].setBubbleColor("empty")
         }
     }

@@ -16,21 +16,21 @@ class BubbleView: UIView {
     private var redBubbleColor: UIColor?
     private var orangeBubbleColor: UIColor?
     private var greenBubbleColor: UIColor?
-    private var color: String
+    private(set) var color: String
     private var checked = false
-    private var row: Int?
-    private var col: Int?
+    private(set) var row: Int?
+    private(set) var col: Int?
     
     // MARK: Initialization
     
-    override init(frame: CGRect) {
+    override init (frame: CGRect) {
         self.color = "empty"
         super.init(frame: frame)
         initBorderStyle()
         setUpBubbleColors()
     }
     
-    init(frame: CGRect, row: Int, col: Int) {
+    init (frame: CGRect, row: Int, col: Int) {
         self.color = "empty"
         self.row = row
         self.col = col
@@ -97,47 +97,58 @@ class BubbleView: UIView {
     }
     
     func setBubbleColor(selectedBubbleTitle: String) {
-        if (selectedBubbleTitle == "blue") {
+        
+        switch selectedBubbleTitle {
+            
+        case Constants.bubbleColorString.blue:
             self.backgroundColor = blueBubbleColor
             self.color = selectedBubbleTitle
-        }
-        if (selectedBubbleTitle == "red") {
+            
+        case Constants.bubbleColorString.red:
             self.backgroundColor = redBubbleColor
             self.color = selectedBubbleTitle
-        }
-        if (selectedBubbleTitle == "orange") {
+            
+        case Constants.bubbleColorString.orange:
             self.backgroundColor = orangeBubbleColor
             self.color = selectedBubbleTitle
-        }
-        if (selectedBubbleTitle == "green") {
+            
+        case Constants.bubbleColorString.green:
             self.backgroundColor = greenBubbleColor
             self.color = selectedBubbleTitle
-        }
-        if (selectedBubbleTitle == "empty") {
+            
+        case Constants.bubbleColorString.empty:
             clearBubble()
+            
+        default:
+             break
         }
     }
     
     // Bubble color cycles between blue -> red -> orange -> green and back to blue
     func cycleBubbleColor() {
-        let bubbleColor = self.backgroundColor
-        if (bubbleColor! == blueBubbleColor) {
+        let bubbleColor = self.backgroundColor!
+        
+        switch bubbleColor {
+            
+        case blueBubbleColor!:
             self.backgroundColor = redBubbleColor
-            self.color = "red"
-        } else if (bubbleColor! == redBubbleColor) {
+            self.color = Constants.bubbleColorString.red
+            
+        case redBubbleColor!:
             self.backgroundColor = orangeBubbleColor
-            self.color = "orange"
-        } else if (bubbleColor! == orangeBubbleColor) {
+            self.color = Constants.bubbleColorString.orange
+            
+        case orangeBubbleColor!:
             self.backgroundColor = greenBubbleColor
-            self.color = "green"
-        } else if (bubbleColor! == greenBubbleColor) {
+            self.color = Constants.bubbleColorString.green
+            
+        case greenBubbleColor!:
             self.backgroundColor = blueBubbleColor
-            self.color = "blue"
+            self.color = Constants.bubbleColorString.blue
+            
+        default:
+            break
         }
-    }
-    
-    func getColor() -> String {
-        return self.color
     }
     
     func setCheck() {
@@ -150,13 +161,5 @@ class BubbleView: UIView {
     
     func resetCheck() {
         self.checked = false
-    }
-    
-    func getRow() -> Int {
-        return self.row!
-    }
-    
-    func getCol() -> Int {
-        return self.col!
     }
 }

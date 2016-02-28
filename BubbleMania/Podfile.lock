@@ -1,0 +1,21 @@
+PODS:
+  - PhysicsEngine (0.2)
+
+DEPENDENCIES:
+  - PhysicsEngine (from `https://thoughtify@bitbucket.org/cs3217/2016-ps5-pod-a0124099.git`,
+    tag `0.3`)
+
+EXTERNAL SOURCES:
+  PhysicsEngine:
+    :git: https://thoughtify@bitbucket.org/cs3217/2016-ps5-pod-a0124099.git
+    :tag: '0.3'
+
+CHECKOUT OPTIONS:
+  PhysicsEngine:
+    :git: https://thoughtify@bitbucket.org/cs3217/2016-ps5-pod-a0124099.git
+    :tag: '0.3'
+
+SPEC CHECKSUMS:
+  PhysicsEngine: 0389ea2bfe4326add797508304c89b70d1d960fd
+
+COCOAPODS: 0.39.0

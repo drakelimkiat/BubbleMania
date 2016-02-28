@@ -10,8 +10,8 @@ import UIKit
 
 class ProjectileBubbleView: BubbleView {
     
-    private var xPosition: CGFloat
-    private var yPosition: CGFloat
+    var xPosition: CGFloat
+    var yPosition: CGFloat
     
     override init(frame: CGRect) {
         xPosition = frame.origin.x
@@ -24,21 +24,4 @@ class ProjectileBubbleView: BubbleView {
         yPosition = CGFloat(0)
         super.init(coder: aDecoder)
     }
-    
-    func setXPosition(xPosition: CGFloat) {
-        self.xPosition = xPosition
-    }
-    
-    func setYPosition(yPosition: CGFloat) {
-        self.yPosition = yPosition
-    }
-    
-    func getXPosition() -> CGFloat {
-        return xPosition
-    }
-    
-    func getYPosition() -> CGFloat {
-        return yPosition
-    }
-    
 }

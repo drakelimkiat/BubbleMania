@@ -1,0 +1,23 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+# use_frameworks!
+
+target 'BubbleMania' do
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.1'
+use_frameworks!
+
+pod 'PhysicsEngine', :git => 'https://thoughtify@bitbucket.org/cs3217/2016-ps5-pod-a0124099.git', :tag => '0.3’
+
+end
+
+target 'BubbleManiaTests' do
+
+end
+
+target 'BubbleManiaUITests' do
+
+end
+

@@ -31,9 +31,9 @@ class LevelDesignViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        setUpGameArea()
-        setUpPallete()
+        setUpBackground()
         setUpGrid()
+        selectedButton = blueBubble
         
         // If there are any saved LevelDesigns, we load and append it to levelDesignArray
         if let savedLevelDesigns = loadLevelDesigns() {
@@ -46,7 +46,7 @@ class LevelDesignViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    private func setUpGameArea() {
+    private func setUpBackground() {
         let backgroundImage = UIImage(named: "background.png")
         let background = UIImageView(image: backgroundImage)
         
@@ -58,24 +58,16 @@ class LevelDesignViewController: UIViewController {
         self.gameArea.addSubview(background)
     }
     
-    private func setUpPallete() {
-        blueBubble.alpha = 0.6
-        redBubble.alpha = 0.6
-        orangeBubble.alpha = 0.6
-        greenBubble.alpha = 0.6
-        eraser.alpha = 0.6
-    }
-    
     // Populates grid by adding 9 rows of BubbleViews
     private func setUpGrid() {
-        let bubbleDiameter = gameArea.frame.size.width/12
+        let bubbleDiameter = gameArea.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
         let intBubbleDiameter = Int(bubbleDiameter)
         
-        for (var i = 0; i < 9; i++) {
+        for row in 0..<9 {
             var bubbleArray = [BubbleView]()
-            let even = (i % 2) == 0
+            let even = (row % 2) == 0
             var startingXPosition = 0
-            let yPosition = (i * intBubbleDiameter) - (i * 9)
+            let yPosition = (row * intBubbleDiameter) - (row * Constants.numbers.overlappingPixelsPerRow)
             
             if (even) {
                 startingXPosition = 0
@@ -83,16 +75,16 @@ class LevelDesignViewController: UIViewController {
                 startingXPosition = intBubbleDiameter / 2
             }
             
-            for (var j = 0; j < 12; j++) {
-                // Odd rows only have 11 BubbleViews
-                if (!even && j == 11) {
+            for col in 0..<12 {
+                // Odd rowIndexes only have 11 BubbleViews
+                if (!even && col == 11) {
                     break
                 }
                 
-                let bubblePoint = CGPoint(x: startingXPosition + (j * intBubbleDiameter), y: yPosition)
+                let bubblePoint = CGPoint(x: startingXPosition + (col * intBubbleDiameter), y: yPosition)
                 let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
                 let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
-                let bubbleView = BubbleView(frame: bubbleRect, row: i, col: j)
+                let bubbleView = BubbleView(frame: bubbleRect, row: row, col: col)
                 self.gameArea.addSubview(bubbleView)
                 bubbleArray.append(bubbleView)
             }
@@ -100,25 +92,11 @@ class LevelDesignViewController: UIViewController {
         }
     }
 
-    // Milestone Code (only used for Start button now)
-    @IBAction func buttonPressed(sender: AnyObject) {
-        let button = sender as! UIButton
-        var newColor : UIColor
-        
-        if (button.titleColorForState(UIControlState.Normal) == UIColor.blueColor()) {
-            newColor = UIColor.lightGrayColor()
-        } else {
-            newColor = UIColor.blueColor()
-        }
-        
-        button.setTitleColor(newColor, forState: UIControlState.Normal)
-    }
-
     // All palette buttons are associated with this IBAction
     @IBAction func paletteButtonPressed(sender: AnyObject) {
-        selectedButton?.alpha = 0.6
+        selectedButton?.alpha = Constants.numbers.paletteUnselectedAlphaValue
         let button = sender as! UIButton
-        button.alpha = 1.0
+        button.alpha = Constants.numbers.paletteSelectedAlphaValue
         selectedButton = button
     }
     
@@ -224,6 +202,10 @@ class LevelDesignViewController: UIViewController {
     
     // Checks through the array of levelDesigns to see if name is unique
     private func isUniqueName(name: String) -> Bool {
+        if (name == "") {
+            return false
+        }
+        
         for levelDesign in levelDesignArray {
             if (levelDesign.getName() == name) {
                 return false
@@ -237,7 +219,7 @@ class LevelDesignViewController: UIViewController {
         var alertController: UIAlertController
         
         alertController = UIAlertController(title: "Error saving file",
-            message: "Specified file name is already in use",
+            message: "Specified file name is empty or already in use",
             preferredStyle: .Alert)
         
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -278,9 +260,11 @@ class LevelDesignViewController: UIViewController {
         
         if let bubbleView = possibleBubbleView {
             if let selectedButtonTitle = selectedButton?.currentTitle {
+                let emptyColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.3)
+                
                 if (selectedButtonTitle == "empty") {
                     bubbleView.clearBubble()
-                } else if (bubbleView.backgroundColor == UIColor.lightGrayColor().colorWithAlphaComponent(0.3)) {
+                } else if (bubbleView.backgroundColor == emptyColor) {
                     bubbleView.setBubbleColor(selectedButtonTitle)
                 } else {
                     bubbleView.cycleBubbleColor()
@@ -317,7 +301,7 @@ class LevelDesignViewController: UIViewController {
                 let bubbleView = bubbleViewArray[i][j]
                 let bubbleXPosition = Int(bubbleView.frame.origin.x)
                 let bubbleYPosition = Int(bubbleView.frame.origin.y)
-                let bubbleColor = bubbleView.getColor()
+                let bubbleColor = bubbleView.color
                 let basicBubble = BasicBubble(xPosition: bubbleXPosition,
                     yPosition: bubbleYPosition, bubbleColor: bubbleColor)
                 rowGameBubbleArray.append(basicBubble)

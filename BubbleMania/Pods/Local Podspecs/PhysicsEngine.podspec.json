@@ -1,0 +1,19 @@
+{
+  "name": "PhysicsEngine",
+  "version": "0.2",
+  "summary": "NUS CS3217 Problem Set 5 physics engine.",
+  "description": "A physics engine that provides path calculation and collision detection.",
+  "homepage": "https://bitbucket.org/cs3217/2016-ps5-a0124099",
+  "license": "",
+  "authors": {
+    "Your Name": "you@email.com"
+  },
+  "platforms": {
+    "ios": "8.1"
+  },
+  "source": {
+    "git": "git@bitbucket.org:cs3217/2016-ps5-pod-a0124099.git",
+    "tag": "0.2"
+  },
+  "source_files": "PhysicsEngine.swift"
+}

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6730F59078F44D3EF4DC138D /* Pods_BubbleMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ADE864AFE46E528FA69DB27 /* Pods_BubbleMania.framework */; };
 		6D9CCE161A764766005AD4FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CCE151A764766005AD4FA /* AppDelegate.swift */; };
 		6D9CCE181A764766005AD4FA /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CCE171A764766005AD4FA /* LevelDesignViewController.swift */; };
 		6D9CCE1B1A764766005AD4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D9CCE191A764766005AD4FA /* Main.storyboard */; };
@@ -39,9 +40,9 @@
 		7B70724B1C6F45DC00FB6508 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70724A1C6F45DC00FB6508 /* GameViewController.swift */; };
 		7B70724C1C6F45DC00FB6508 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70724A1C6F45DC00FB6508 /* GameViewController.swift */; };
 		7B70724D1C6F45DC00FB6508 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B70724A1C6F45DC00FB6508 /* GameViewController.swift */; };
-		7B70724F1C6FB38200FB6508 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon.png */; };
-		7B7072501C6FB38200FB6508 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon.png */; };
-		7B7072511C6FB38200FB6508 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon.png */; };
+		7B70724F1C6FB38200FB6508 /* cannon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon2.png */; };
+		7B7072501C6FB38200FB6508 /* cannon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon2.png */; };
+		7B7072511C6FB38200FB6508 /* cannon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B70724E1C6FB38200FB6508 /* cannon2.png */; };
 		7B7072531C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7072521C7027CF00FB6508 /* ProjectileBubbleView.swift */; };
 		7B7072541C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7072521C7027CF00FB6508 /* ProjectileBubbleView.swift */; };
 		7B7072551C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7072521C7027CF00FB6508 /* ProjectileBubbleView.swift */; };
@@ -56,6 +57,9 @@
 		7B7072641C7099C100FB6508 /* LevelDesignTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB784991C60FA7600E8FB95 /* LevelDesignTableViewController.swift */; };
 		7B7072651C7099C600FB6508 /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CCE171A764766005AD4FA /* LevelDesignViewController.swift */; };
 		7B7072661C7099C600FB6508 /* LevelDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9CCE171A764766005AD4FA /* LevelDesignViewController.swift */; };
+		7B825C081C81E568004FB3E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B825C071C81E568004FB3E8 /* Constants.swift */; };
+		7B825C091C81E568004FB3E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B825C071C81E568004FB3E8 /* Constants.swift */; };
+		7B825C0A1C81E568004FB3E8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B825C071C81E568004FB3E8 /* Constants.swift */; };
 		7BAC212E1C610B16002E33BA /* LevelDesignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAC212D1C610B16002E33BA /* LevelDesignTableViewCell.swift */; };
 		7BAC212F1C610B16002E33BA /* LevelDesignTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAC212D1C610B16002E33BA /* LevelDesignTableViewCell.swift */; };
 		7BB784941C60EDF800E8FB95 /* GameBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB784931C60EDF800E8FB95 /* GameBubble.swift */; };
@@ -71,6 +75,12 @@
 		7BC2A40D1C5DEAF400D8A0A4 /* bubble-red.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC2A4061C5DEAF400D8A0A4 /* bubble-red.png */; };
 		7BC2A40E1C5DEAF400D8A0A4 /* eraser-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC2A4071C5DEAF400D8A0A4 /* eraser-1.png */; };
 		7BC2A40F1C5DEAF400D8A0A4 /* eraser-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC2A4081C5DEAF400D8A0A4 /* eraser-2.png */; };
+		7BFF3C411C828A07004091C8 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C401C828A07004091C8 /* cannon.png */; };
+		7BFF3C421C828A07004091C8 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C401C828A07004091C8 /* cannon.png */; };
+		7BFF3C431C828A07004091C8 /* cannon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C401C828A07004091C8 /* cannon.png */; };
+		7BFF3C451C828C31004091C8 /* cannon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C441C828C31004091C8 /* cannon_1.png */; };
+		7BFF3C461C828C31004091C8 /* cannon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C441C828C31004091C8 /* cannon_1.png */; };
+		7BFF3C471C828C31004091C8 /* cannon_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BFF3C441C828C31004091C8 /* cannon_1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,18 +101,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6D9CCE101A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleMania.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ADE864AFE46E528FA69DB27 /* Pods_BubbleMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BubbleMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9CCE101A764766005AD4FA /* BubbleMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubbleMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D9CCE141A764766005AD4FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D9CCE151A764766005AD4FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D9CCE171A764766005AD4FA /* LevelDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignViewController.swift; sourceTree = "<group>"; };
 		6D9CCE1A1A764766005AD4FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D9CCE1C1A764766005AD4FA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6D9CCE1F1A764766005AD4FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		6D9CCE251A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleMania.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9CCE251A764766005AD4FA /* BubbleMania.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleMania.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D9CCE2A1A764766005AD4FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D9CCE2B1A764766005AD4FA /* LevelDesignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerTests.swift; sourceTree = "<group>"; };
 		7B2195E61C6624F60011C312 /* BubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
-		7B2195ED1C6660FA0011C312 /* BubbleMania.temp_caseinsensitive_rename.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleMania.temp_caseinsensitive_rename.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B2195ED1C6660FA0011C312 /* BubbleMania.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BubbleMania.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2195EF1C6660FA0011C312 /* LevelDesignerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerUITests.swift; sourceTree = "<group>"; };
 		7B2195F11C6660FA0011C312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B2195F71C6664AB0011C312 /* BasicBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBubble.swift; sourceTree = "<group>"; };
@@ -113,10 +124,11 @@
 		7B2967211C81D7540031B680 /* bubble-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-star.png"; sourceTree = "<group>"; };
 		7B2967221C81D7540031B680 /* cannon-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cannon-base.png"; sourceTree = "<group>"; };
 		7B70724A1C6F45DC00FB6508 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		7B70724E1C6FB38200FB6508 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cannon.png; path = ../cannon.png; sourceTree = "<group>"; };
+		7B70724E1C6FB38200FB6508 /* cannon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cannon2.png; path = ../cannon2.png; sourceTree = "<group>"; };
 		7B7072521C7027CF00FB6508 /* ProjectileBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectileBubbleView.swift; sourceTree = "<group>"; };
 		7B7072561C70511100FB6508 /* PhysicsEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsEngine.swift; sourceTree = "<group>"; };
 		7B70725E1C70617A00FB6508 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		7B825C071C81E568004FB3E8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7BAC212D1C610B16002E33BA /* LevelDesignTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesignTableViewCell.swift; sourceTree = "<group>"; };
 		7BB784931C60EDF800E8FB95 /* GameBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBubble.swift; sourceTree = "<group>"; };
 		7BB784961C60F48300E8FB95 /* LevelDesign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesign.swift; sourceTree = "<group>"; };
@@ -128,6 +140,10 @@
 		7BC2A4061C5DEAF400D8A0A4 /* bubble-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble-red.png"; sourceTree = "<group>"; };
 		7BC2A4071C5DEAF400D8A0A4 /* eraser-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eraser-1.png"; sourceTree = "<group>"; };
 		7BC2A4081C5DEAF400D8A0A4 /* eraser-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eraser-2.png"; sourceTree = "<group>"; };
+		7BFF3C401C828A07004091C8 /* cannon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon.png; sourceTree = "<group>"; };
+		7BFF3C441C828C31004091C8 /* cannon_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannon_1.png; sourceTree = "<group>"; };
+		F095B404B23DC0BE714583F3 /* Pods-BubbleMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleMania.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleMania/Pods-BubbleMania.debug.xcconfig"; sourceTree = "<group>"; };
+		FFF433C217F9F8D22CD78D9B /* Pods-BubbleMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubbleMania.release.xcconfig"; path = "Pods/Target Support Files/Pods-BubbleMania/Pods-BubbleMania.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6730F59078F44D3EF4DC138D /* Pods_BubbleMania.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +172,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FC682AF8A33781BF9480DB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F095B404B23DC0BE714583F3 /* Pods-BubbleMania.debug.xcconfig */,
+				FFF433C217F9F8D22CD78D9B /* Pods-BubbleMania.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6D9CCE071A764766005AD4FA = {
 			isa = PBXGroup;
 			children = (
@@ -162,15 +188,17 @@
 				6D9CCE281A764766005AD4FA /* BubbleManiaTests */,
 				7B2195EE1C6660FA0011C312 /* BubbleManiaUITests */,
 				6D9CCE111A764766005AD4FA /* Products */,
+				3FC682AF8A33781BF9480DB3 /* Pods */,
+				7EC57BC7379D80FE4E4B84B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		6D9CCE111A764766005AD4FA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D9CCE101A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.app */,
-				6D9CCE251A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.xctest */,
-				7B2195ED1C6660FA0011C312 /* BubbleMania.temp_caseinsensitive_rename.xctest */,
+				6D9CCE101A764766005AD4FA /* BubbleMania.app */,
+				6D9CCE251A764766005AD4FA /* BubbleMania.xctest */,
+				7B2195ED1C6660FA0011C312 /* BubbleMania.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +211,7 @@
 				7BB7849C1C60FACF00E8FB95 /* Model */,
 				7B7072561C70511100FB6508 /* PhysicsEngine.swift */,
 				7B70725E1C70617A00FB6508 /* Renderer.swift */,
+				7B825C071C81E568004FB3E8 /* Constants.swift */,
 				7B29671C1C81D7100031B680 /* Images */,
 				6D9CCE151A764766005AD4FA /* AppDelegate.swift */,
 				6D9CCE191A764766005AD4FA /* Main.storyboard */,
@@ -230,6 +259,8 @@
 		7B29671C1C81D7100031B680 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7BFF3C441C828C31004091C8 /* cannon_1.png */,
+				7BFF3C401C828A07004091C8 /* cannon.png */,
 				7B29671D1C81D7540031B680 /* bubble-bomb.png */,
 				7B29671E1C81D7540031B680 /* bubble-burst.png */,
 				7B29671F1C81D7540031B680 /* bubble-indestructible.png */,
@@ -239,7 +270,7 @@
 				7BC2A4021C5DEAF400D8A0A4 /* background.png */,
 				7BC2A4031C5DEAF400D8A0A4 /* bubble-blue.png */,
 				7BC2A4041C5DEAF400D8A0A4 /* bubble-green.png */,
-				7B70724E1C6FB38200FB6508 /* cannon.png */,
+				7B70724E1C6FB38200FB6508 /* cannon2.png */,
 				7BC2A4051C5DEAF400D8A0A4 /* bubble-orange.png */,
 				7BC2A4061C5DEAF400D8A0A4 /* bubble-red.png */,
 				7BC2A4071C5DEAF400D8A0A4 /* eraser-1.png */,
@@ -278,6 +309,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		7EC57BC7379D80FE4E4B84B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6ADE864AFE46E528FA69DB27 /* Pods_BubbleMania.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,9 +324,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6D9CCE2F1A764766005AD4FA /* Build configuration list for PBXNativeTarget "BubbleMania" */;
 			buildPhases = (
+				A63AC54B707E3E00484290F4 /* Check Pods Manifest.lock */,
 				6D9CCE0C1A764766005AD4FA /* Sources */,
 				6D9CCE0D1A764766005AD4FA /* Frameworks */,
 				6D9CCE0E1A764766005AD4FA /* Resources */,
+				C259FD961394A1C77450E834 /* Embed Pods Frameworks */,
+				9A9BC76BA6E9D1C0FC61CA57 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -295,7 +337,7 @@
 			);
 			name = BubbleMania;
 			productName = LevelDesigner;
-			productReference = 6D9CCE101A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.app */;
+			productReference = 6D9CCE101A764766005AD4FA /* BubbleMania.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6D9CCE241A764766005AD4FA /* BubbleManiaTests */ = {
@@ -313,7 +355,7 @@
 			);
 			name = BubbleManiaTests;
 			productName = LevelDesignerTests;
-			productReference = 6D9CCE251A764766005AD4FA /* BubbleMania.temp_caseinsensitive_rename.xctest */;
+			productReference = 6D9CCE251A764766005AD4FA /* BubbleMania.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7B2195EC1C6660FA0011C312 /* BubbleManiaUITests */ = {
@@ -331,7 +373,7 @@
 			);
 			name = BubbleManiaUITests;
 			productName = LevelDesignerUITests;
-			productReference = 7B2195ED1C6660FA0011C312 /* BubbleMania.temp_caseinsensitive_rename.xctest */;
+			productReference = 7B2195ED1C6660FA0011C312 /* BubbleMania.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -387,7 +429,7 @@
 				7BC2A40C1C5DEAF400D8A0A4 /* bubble-orange.png in Resources */,
 				6D9CCE1B1A764766005AD4FA /* Main.storyboard in Resources */,
 				7BC2A40F1C5DEAF400D8A0A4 /* eraser-2.png in Resources */,
-				7B70724F1C6FB38200FB6508 /* cannon.png in Resources */,
+				7B70724F1C6FB38200FB6508 /* cannon2.png in Resources */,
 				7BC2A40B1C5DEAF400D8A0A4 /* bubble-green.png in Resources */,
 				7B29672F1C81D7540031B680 /* bubble-star.png in Resources */,
 				7B2967321C81D7540031B680 /* cannon-base.png in Resources */,
@@ -398,8 +440,10 @@
 				7B2967231C81D7540031B680 /* bubble-bomb.png in Resources */,
 				7BC2A40D1C5DEAF400D8A0A4 /* bubble-red.png in Resources */,
 				7BC2A40A1C5DEAF400D8A0A4 /* bubble-blue.png in Resources */,
+				7BFF3C411C828A07004091C8 /* cannon.png in Resources */,
 				6D9CCE1D1A764766005AD4FA /* Images.xcassets in Resources */,
 				7B2967261C81D7540031B680 /* bubble-burst.png in Resources */,
+				7BFF3C451C828C31004091C8 /* cannon_1.png in Resources */,
 				7BC2A40E1C5DEAF400D8A0A4 /* eraser-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,8 +452,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B7072501C6FB38200FB6508 /* cannon.png in Resources */,
+				7BFF3C461C828C31004091C8 /* cannon_1.png in Resources */,
+				7B7072501C6FB38200FB6508 /* cannon2.png in Resources */,
 				7B29672D1C81D7540031B680 /* bubble-lightning.png in Resources */,
+				7BFF3C421C828A07004091C8 /* cannon.png in Resources */,
 				7B2967271C81D7540031B680 /* bubble-burst.png in Resources */,
 				7B2967331C81D7540031B680 /* cannon-base.png in Resources */,
 				7B2967301C81D7540031B680 /* bubble-star.png in Resources */,
@@ -422,8 +468,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B7072511C6FB38200FB6508 /* cannon.png in Resources */,
+				7BFF3C471C828C31004091C8 /* cannon_1.png in Resources */,
+				7B7072511C6FB38200FB6508 /* cannon2.png in Resources */,
 				7B29672E1C81D7540031B680 /* bubble-lightning.png in Resources */,
+				7BFF3C431C828A07004091C8 /* cannon.png in Resources */,
 				7B2967281C81D7540031B680 /* bubble-burst.png in Resources */,
 				7B2967341C81D7540031B680 /* cannon-base.png in Resources */,
 				7B2967311C81D7540031B680 /* bubble-star.png in Resources */,
@@ -433,6 +481,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9A9BC76BA6E9D1C0FC61CA57 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleMania/Pods-BubbleMania-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A63AC54B707E3E00484290F4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C259FD961394A1C77450E834 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BubbleMania/Pods-BubbleMania-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6D9CCE0C1A764766005AD4FA /* Sources */ = {
@@ -446,6 +542,7 @@
 				7B70725F1C70617A00FB6508 /* Renderer.swift in Sources */,
 				7B70724B1C6F45DC00FB6508 /* GameViewController.swift in Sources */,
 				7B7072571C70511100FB6508 /* PhysicsEngine.swift in Sources */,
+				7B825C081C81E568004FB3E8 /* Constants.swift in Sources */,
 				7BAC212E1C610B16002E33BA /* LevelDesignTableViewCell.swift in Sources */,
 				6D9CCE181A764766005AD4FA /* LevelDesignViewController.swift in Sources */,
 				7B7072531C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */,
@@ -465,6 +562,7 @@
 				7B7072601C70617A00FB6508 /* Renderer.swift in Sources */,
 				7B70724C1C6F45DC00FB6508 /* GameViewController.swift in Sources */,
 				7B7072651C7099C600FB6508 /* LevelDesignViewController.swift in Sources */,
+				7B825C091C81E568004FB3E8 /* Constants.swift in Sources */,
 				7BB784981C60F48300E8FB95 /* LevelDesign.swift in Sources */,
 				7B7072541C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */,
 				7BB7849B1C60FA7600E8FB95 /* LevelDesignTableViewController.swift in Sources */,
@@ -482,6 +580,7 @@
 				7B7072551C7027CF00FB6508 /* ProjectileBubbleView.swift in Sources */,
 				7B7072661C7099C600FB6508 /* LevelDesignViewController.swift in Sources */,
 				7B70724D1C6F45DC00FB6508 /* GameViewController.swift in Sources */,
+				7B825C0A1C81E568004FB3E8 /* Constants.swift in Sources */,
 				7B7072631C7099BC00FB6508 /* LevelDesignTableViewCell.swift in Sources */,
 				7B2195F01C6660FA0011C312 /* LevelDesignerUITests.swift in Sources */,
 				7B7072611C70617A00FB6508 /* Renderer.swift in Sources */,
@@ -606,25 +705,27 @@
 		};
 		6D9CCE301A764766005AD4FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F095B404B23DC0BE714583F3 /* Pods-BubbleMania.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BubbleMania/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0124099.BubbleMania;
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
+				PRODUCT_NAME = BubbleMania;
 			};
 			name = Debug;
 		};
 		6D9CCE311A764766005AD4FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFF433C217F9F8D22CD78D9B /* Pods-BubbleMania.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BubbleMania/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0124099.BubbleMania;
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
+				PRODUCT_NAME = BubbleMania;
 			};
 			name = Release;
 		};
@@ -643,8 +744,8 @@
 				INFOPLIST_FILE = BubbleManiaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nus.cs3217.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BubbleMania.temp_caseinsensitive_rename.app/BubbleMania.temp_caseinsensitive_rename";
+				PRODUCT_NAME = BubbleMania;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BubbleMania.app/BubbleMania";
 			};
 			name = Debug;
 		};
@@ -659,8 +760,8 @@
 				INFOPLIST_FILE = BubbleManiaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "nus.cs3217.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BubbleMania.temp_caseinsensitive_rename.app/BubbleMania.temp_caseinsensitive_rename";
+				PRODUCT_NAME = BubbleMania;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BubbleMania.app/BubbleMania";
 			};
 			name = Release;
 		};
@@ -673,7 +774,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0124099b.BubbleManiaUITests;
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
+				PRODUCT_NAME = BubbleMania;
 				TEST_TARGET_NAME = BubbleMania;
 				USES_XCTRUNNER = YES;
 			};
@@ -689,7 +790,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.a0124099b.BubbleManiaUITests;
-				PRODUCT_NAME = BubbleMania.temp_caseinsensitive_rename;
+				PRODUCT_NAME = BubbleMania;
 				TEST_TARGET_NAME = BubbleMania;
 				USES_XCTRUNNER = YES;
 			};
