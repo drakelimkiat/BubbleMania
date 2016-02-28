@@ -42,7 +42,7 @@ class GameEngine {
         let randomColor: String
         
         if (colorArray.count == 0) {
-            randomColor = Constants.bubbleColorString.empty
+            randomColor = getRandomColor()
         } else {
             randomColor = colorArray[Int(arc4random_uniform(UInt32(colorArray.count)))]
         }
@@ -175,5 +175,12 @@ class GameEngine {
             }
         }
         return true
+    }
+    
+    private func getRandomColor() -> String {
+        let colorArray = [Constants.bubbleColorString.blue, Constants.bubbleColorString.green,
+            Constants.bubbleColorString.orange, Constants.bubbleColorString.red]
+        let randomColor = colorArray[Int(arc4random_uniform(UInt32(colorArray.count)))]
+        return randomColor
     }
 }

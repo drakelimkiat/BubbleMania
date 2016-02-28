@@ -2,39 +2,55 @@
 # CS3217 Problem Set 5 #
 ########################
 
-# Name: 
-# Matric No:
-# Tutor:
+# Name: Lim Kiat
+# Matric No: A0124099B
+# Tutor: Wu Di
 
 ######################
 # Rules of Your Game #
 ######################
 
-Your Answer here
+Pretty much as what you can expect from the description in the problem sets.
+The game ends when there are no more bubbles in the grid.
 
 ###############################
 # Problem 1: Cannon Direction #
 ###############################
 
-Your Answer here
+The user can select the cannon direction in two ways. 
+Firstly, simply by tapping on any part of the screen, the cannon will shoot in the direction of where the screen was tapped.
+Secondly, the user can pan on the screen and the cannon will follow the direction of the pan. Tap again to fire the bubble.
 
 ###############################
 # Problem 2: Upcoming Bubbles #
 ###############################
 
-Your Answer here
+My algorithm to decide on the colours of the next bubble is pretty simple.
+First, it looks at the whole grid and appends the bubble colors into an array. Only the default colors (red, green, blue and orange) are added. This means that if there are more red bubbles in the grid, there will also be more red colors in the bubbleColorArray. Next, I randomly choose one color from the array and that will be the color of the next projectile bubble.
+
+I find that this way of implementing makes the most sense as it ultimately helps the player in trying to complete the game by having a higher chance of choosing the color that appears most often in the grid. Colors that do not exist in the grid will also not appear, making the game simpler and more user friendly as well. Finally, it is easy to implement and understand.
 
 ##########################
 # Problem 3: Integration #
 ##########################
 
-Your Answer here
+I took note of my TA’s comments in PS3 and PS4 and abstracted out many stuff into their own classes before doing the integration for PS5. (BubbleGrid, PersistentData(saving and loading), GameEngine, Constants).
+
+By designing the app in a MVC fashion (I have 3 folders for the 3 different groups), it was easy for me to integrate and put everything together as it was pretty clear which function should go where and how the components should interact. By taking the advice of my TA and breaking my Controller classes into even more classes, I was able to cut down on much of my code in my Controller classes, making it less cluttered and easier to comprehend and debug. By having 3 components for the game (namely GameEngine, PhysicsEngine and Renderer), it was also easy for my GameViewController code to bring the 3 classes together and implement the game.
+
+Some disadvantages might be that some of my functions are repeated in different classes, due to a lack of time, I was unable to think of other ways to cut down on these repetitions and bring them to a common class. However, much of the code has already been reduced as the result of implementing the different classes.
+
+One alternative approach would be to code everything on the ViewController classes. Although the design is simple and can be easy to implement if we were to do it in one shot, it becomes hard for other people to understand what your code is about, the class becomes very messy and it can be very hard to debug.
 
 ###############
 # Problem 4.3 #
 ###############
 
-Your Answer here
+My general strategy is to first include the bubbles in the palette. Then, I created new properties in my BubbleView class and GameBubble storage class to represent if a bubble has a power and what power it is.
+
+Thereafter, I had to add new methods in my BubbleGrid class to check whenever a power bubble has been touched by the projectile bubble. Depending on which kind of power bubble has been touched, I will update the array of bubbles to be removed, check the bubbles to be removed for any new power bubbles, and continually do so until all power bubbles that are chained are accounted for. 
+
+This strategy is advantageous because it was much simpler to implement than I thought. Adding the special functionalities of the special bubbles were done in around 20 minutes as I had all my classes refactored and I could easily tell where I had to add in new methods to support the new functionalities.
 
 ############################
 # Problem 6: Class Diagram #
@@ -46,19 +62,105 @@ Please save your diagram as `class-diagram.png` in the root directory of the rep
 # Problem 7: Testing #
 ######################
 
-Your Answer here
+- Test implementation of buttons and alerts:
+
+	- Pressing palette buttons:
+		- When application is first started. Expected behaviour: All palette buttons are translucent.
+		- When one of the palette buttons has been clicked. Expected behaviour: Clicked palette button becomes opaque while the rest remains translucent.
+		- When another palette button has been clicked. Expected behaviour: Previous clicked button becomes translucent while the new clicked button becomes opaque.
+
+	- Pressing save button:
+		- If current LevelDesign is a new file. Expected behaviour: AlertController with a text field appears asking user to key in a unique name to save the file as
+			- Pressing cancel. Expected behaviour: File is not saved and AlertController is dismissed, returning back to main ViewController
+		- If current LevelDesign is a loaded file. Expected behaviour: AlertController with 3 options appear (overwrite saved file, saye as new file, cancel)
+			- Pressing cancel. Expected behaviour: File is not saved and AlertController is dismissed, returning back to main ViewController
+
+	- Pressing load button. Expected behaviour: A UITableView is shown on the screen
+
+	- Pressing reset button. Expected behaviour: All bubbles become empty
+
+	- Pressing cancel button in UITableView. Expected behaviour: Returns back to main View
+
+
+- Test implementation of file operations:
+
+	- Saving a new file:
+		- Saving an empty LevelDesign. Expected behaviour: Allows you to save if name has not been used before
+		- Saving a LevelDesign with empty string as name. Expected behaviour: Allows you to save if empty string has not been used as name before
+		- Saving a LevelDesign with a name that has been used before. Expected behaviour: Alert pops up with appropriate message, LevelDesign not saved.
+
+	- Loading a file:
+		- Attempting to load with no file selected. Expected behaviour: Returns back to ViewController without loading any file, original LevelDesign in ViewController (before going to load screen) is still there
+		- Loading a selected file. Expected behaviour: LevelDesign gets loaded and is shown in the View
+		- Loading another file after a load has been done. Expected behaviour: New LevelDesign gets loaded and replaces previous LevelDesign in the View
+
+	- Modifying and saving a loaded file:
+		- Choosing overwrite saved file option. Expected behaviour: Saving has been allowed. LevelDesign has been overwritten in the array at the correct position.
+		- Load the overwritten file. Expected behaviour: Loading is successful and displays the newly saved state.
+		- Choosing save as new file option. Expected behaviour: User has to key in a unique name. See Saving a new file above.
+
+
+- Test implementation of Level Designer:
+	
+	- Tapping GameArea with bubbles and without bubbles with no selection in palette. Expected behaviour: Nothing happens, no error occurs.
+
+	- Tapping GameArea with bubbles with a coloured bubble selected in palette:
+		- Bubble was previously empty. Expected behaviour: Bubble becomes filled with the selected colour
+		- Bubble was previously already coloured. Expected behaviour: Bubble colour cycles from blue -> red -> orange -> green and back to blue
+
+	- Tapping GameArea without bubbles with a coloured bubble or eraser selected in palette. Expected behaviour: Nothing happens, no error occurs.
+
+	- Tapping GameArea with bubbles with eraser selected in palette:
+		- Bubble was previously empty. Expected behaviour: Bubble remains empty
+		- Bubble was previously coloured. Expected behaviour: Bubble is now empty
+
+	- Long-tapping GameArea with bubbles with any selection or no selection in palette:
+		- Bubble was previously empty. Expected behaviour: Bubble remains empty
+		- Bubble was previously coloured. Expected behaviour: Bubble is now empty
+
+	- Long-tapping GameArea without bubbles with any selection or no selection in palette. Expected behaviour: Nothing happens, no error occurs.
+
+	- Dragging over GameArea with or without bubbles with no selection in palette. Expected behaviour: Nothing happens, no error occurs.
+
+	- Dragging over GameArea with bubbles with a selection in palette. Expected behaviour: All bubbles which has been dragged over will either become coloured or empty depending on selection in palette
+
+	- Dragging over GameArea without bubbles with a selection in palette. Expected behaviour: Nothing happens, no error occurs.
+
+
+- Test implementation of launching a projectile bubble:
+	- When user taps on the screen, the projectile bubble with the correct color gets launched in the correct direction
+	- When a bubble is launched and has not yet collided, a new projectile bubble will not appear for user to launch
+	- When projectile bubble collides with the ceiling or any other bubbles in the game, it snaps into position, and a new projectile bubble is ready for launch
+
+- Test implementation of bubble movement
+	- Bubble moves at a constant speed
+	- Bubble bounces off both left and right walls
+	- Bubble stops moving after touching ceiling or another bubble
+
+- Test implementation of bubble snapping
+	- When projectile bubble collides with another bubble in the game, it snaps to the nearest grid position, attached to the nearest bubble
+	- When projectile bubble collides with ceiling, snaps to nearest grid in top row
+
+- Test implemention of bubble collision
+	- When a bubble snaps into position and is not clustered with more than 2 bubbles of the same color, it simply remains there
+	- When a bubble snaps into position and is clustered with more than 2 bubbles of the same color, all the bubbles with the same color disappears (no animation done due to time constraints)
+	- When a cluster of bubbles has been removed, any floating bubbles will also disappear
 
 
 ###################################
 # Problem 8: The Bells & Whistles #
 ###################################
 
-Your Answer here
-
+An end game screen is shown when there are no more bubbles in the grid.
+The end game screen allows you to return to the main menu as well.
 
 ###############################
 # Problem 9: Final Reflection #
 ###############################
 
-Your Answer here
+My app has mostly followed the MVC design architecture and the design of my game engine involves the GameEngine, PhysicsEngine and Renderer. Even though a big amount of points were deducted in the earlier PS for my earlier designs, the comments from my TA were very beneficial in helping me to understand how to refactor and organise my code better into their separate classes. As a result, after cleaning up my code for PS3 and PS4, integrating them to do PS5 was a less stressful process. 
+
+One way that I think I can improve on the design would be to look through the whole organisation again, pick out common functions that I have used, and try to come up with a way to put them together so that the code does not have to repeat and the app becomes simpler for other people to understand as well.
+
+However, I think that my code has already come a long way since the beginning when everything was in 1 ViewController and I feel that this way of presenting the implementation is quite easy to understand. Therefore, with regards to the overall design, I feel that I would make a big change at an attempt to improve it.
 
