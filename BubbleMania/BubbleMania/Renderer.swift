@@ -11,22 +11,22 @@ import UIKit
 class Renderer {
     
     private var gameAreaFrame: CGRect
-    private var bubbleViewArray: [[BubbleView]]
+    private var bubbleGrid: BubbleGrid
     private var gameArea: UIView?
     private var projectileBubble: ProjectileBubbleView?
     private var projectileBubbleAngle: CGFloat?
     private var bubbleIsLaunched = false
     private var bubblesToRemove: [BubbleView]?
     
-    init(bubbleViewArray: [[BubbleView]], gameAreaFrame: CGRect) {
+    init(bubbleGrid: BubbleGrid, gameAreaFrame: CGRect) {
         self.gameAreaFrame = gameAreaFrame
-        self.bubbleViewArray = bubbleViewArray
+        self.bubbleGrid = bubbleGrid
     }
     
     // Allows you to update the properties of the renderer, so they can be used in render()
-    func updateRendererProperties(bubbleViewArray: [[BubbleView]], projectileBubble: ProjectileBubbleView,
+    func updateRendererProperties(bubbleGrid: BubbleGrid, projectileBubble: ProjectileBubbleView,
         bubbleIsLaunched: Bool, bubblesToRemove: [BubbleView]) {
-        self.bubbleViewArray = bubbleViewArray
+        self.bubbleGrid = bubbleGrid
         self.projectileBubble = projectileBubble
         self.bubbleIsLaunched = bubbleIsLaunched
         self.bubblesToRemove = bubblesToRemove
@@ -72,6 +72,8 @@ class Renderer {
     }
     
     private func setUpGrid() {
+        let bubbleViewArray = bubbleGrid.bubbleViewArray
+        
         for row in 0..<bubbleViewArray.count {
             let even = (row % 2) == 0
             

@@ -21,7 +21,8 @@ class LevelDesignViewController: UIViewController {
     
     // selected palette button
     private var selectedButton: UIButton?
-    private var bubbleViewArray = [[BubbleView]]()
+    private var bubbleGrid: BubbleGrid?
+   // private var bubbleViewArray = [[BubbleView]]()
     private var levelDesignArray = [LevelDesign]()
     // indicates if current file is a loaded LevelDesign
     private var isLoadedLevelDesign = false
@@ -32,7 +33,8 @@ class LevelDesignViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setUpBackground()
-        setUpGrid()
+        let bubbleViewArray = setUpGrid()
+        bubbleGrid = BubbleGrid(bubbleViewArray: bubbleViewArray)
         selectedButton = blueBubble
         
         // If there are any saved LevelDesigns, we load and append it to levelDesignArray
@@ -59,7 +61,8 @@ class LevelDesignViewController: UIViewController {
     }
     
     // Populates grid by adding 9 rows of BubbleViews
-    private func setUpGrid() {
+    private func setUpGrid() -> [[BubbleView]] {
+        var bubbleViewArray = [[BubbleView]]()
         let bubbleDiameter = gameArea.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
         let intBubbleDiameter = Int(bubbleDiameter)
         
@@ -90,6 +93,7 @@ class LevelDesignViewController: UIViewController {
             }
             bubbleViewArray.append(bubbleArray)
         }
+        return bubbleViewArray
     }
 
     // All palette buttons are associated with this IBAction
@@ -232,9 +236,17 @@ class LevelDesignViewController: UIViewController {
     }
     
     @IBAction func resetButtonPressed(sender: AnyObject) {
-        for array in bubbleViewArray {
-            for bubbleView in array {
+        for row in 0..<9 {
+            let even = (row % 2) == 0
+            
+            for col in 0..<12 {
+                if (!even && col == 11) {
+                    break
+                }
+                
+                let bubbleView = bubbleGrid![row, col]
                 bubbleView.clearBubble()
+                bubbleGrid![row, col] = bubbleView
             }
         }
     }
@@ -289,16 +301,16 @@ class LevelDesignViewController: UIViewController {
     private func makeLevelDesign(name: String) -> LevelDesign {
         var gameBubbleArray = [[GameBubble]]()
         
-        for (var i = 0; i < 9; i++) {
-            let even = (i % 2) == 0
+        for row in 0..<9 {
+            let even = (row % 2) == 0
             var rowGameBubbleArray = [GameBubble]()
             
-            for (var j = 0; j < 12; j++) {
-                if (!even && j == 11) {
+            for col in 0..<12 {
+                if (!even && col == 11) {
                     break
                 }
                 
-                let bubbleView = bubbleViewArray[i][j]
+                let bubbleView = bubbleGrid![row, col]
                 let bubbleXPosition = Int(bubbleView.frame.origin.x)
                 let bubbleYPosition = Int(bubbleView.frame.origin.y)
                 let bubbleColor = bubbleView.color
@@ -317,17 +329,18 @@ class LevelDesignViewController: UIViewController {
     private func loadSelectedLevelDesign(selectedLevelDesign: LevelDesign) {
         let gameBubbleArray = selectedLevelDesign.getGameBubbleArray()
         
-        for (var i = 0; i < 9 ; i++) {
-            let even = (i % 2) == 0
+        for row in 0..<9 {
+            let even = (row % 2) == 0
             
-            for (var j = 0; j < 12; j++) {
-                if (!even && j == 11) {
+            for col in 0..<12 {
+                if (!even && col == 11) {
                     break
                 }
                 
-                let basicBubble = gameBubbleArray[i][j] as! BasicBubble
-                let bubbleView = bubbleViewArray[i][j]
+                let basicBubble = gameBubbleArray[row][col] as! BasicBubble
+                let bubbleView = bubbleGrid![row, col]
                 bubbleView.setBubbleColor(basicBubble.getBubbleColor())
+                bubbleGrid![row, col] = bubbleView
             }
         }
     }
@@ -342,7 +355,7 @@ class LevelDesignViewController: UIViewController {
         }
         if (segue.identifier == "start") {
             let vc = segue.destinationViewController as! GameViewController
-            vc.bubbleViewArray = bubbleViewArray
+            vc.bubbleGrid = bubbleGrid
         }
     }
     
