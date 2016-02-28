@@ -22,12 +22,12 @@ class LevelDesignViewController: UIViewController {
     // selected palette button
     private var selectedButton: UIButton?
     private var bubbleGrid: BubbleGrid?
-   // private var bubbleViewArray = [[BubbleView]]()
-    private var levelDesignArray = [LevelDesign]()
     // indicates if current file is a loaded LevelDesign
     private var isLoadedLevelDesign = false
     // indicates the index of current LevelDesign if it is a loaded one
-    private var selectedLevelDesignIndex: Int?
+    var selectedLevelDesignIndex: Int?
+    var persistentData: PersistentData?
+    var loadedFromMenu = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +36,12 @@ class LevelDesignViewController: UIViewController {
         let bubbleViewArray = setUpGrid()
         bubbleGrid = BubbleGrid(bubbleViewArray: bubbleViewArray)
         selectedButton = blueBubble
+        persistentData = PersistentData()
         
-        // If there are any saved LevelDesigns, we load and append it to levelDesignArray
-        if let savedLevelDesigns = loadLevelDesigns() {
-            levelDesignArray += savedLevelDesigns
+        if (loadedFromMenu) {
+            let selectedLevelDesign = persistentData?.levelDesignArray[selectedLevelDesignIndex!]
+            loadSelectedLevelDesign(selectedLevelDesign!)
+            isLoadedLevelDesign = true
         }
     }
 
@@ -58,6 +60,7 @@ class LevelDesignViewController: UIViewController {
         background.frame = CGRectMake(0, 0, gameViewWidth, gameViewHeight)
         
         self.gameArea.addSubview(background)
+        self.view.sendSubviewToBack(gameArea)
     }
     
     // Populates grid by adding 9 rows of BubbleViews
@@ -118,6 +121,10 @@ class LevelDesignViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // Returns UIAlertController to save a new file using a unique name
     private func saveNewFile() -> UIAlertController {
         var alertController: UIAlertController
@@ -142,11 +149,10 @@ class LevelDesignViewController: UIViewController {
                     if let name = enteredText {
                         // The file will only be saved if entered name is unique
                         if (self!.isUniqueName(name)) {
-                            let levelDesign = self!.makeLevelDesign(name)
-                            self!.levelDesignArray.append(levelDesign)
-                            self!.saveLevelDesigns(self!.levelDesignArray)
+                            self!.persistentData!.saveLevelDesign(name, bubbleGrid: self!.bubbleGrid!,
+                                selectedLevelDesignIndex: -1)
                             self!.isLoadedLevelDesign = true
-                            self!.selectedLevelDesignIndex = self!.levelDesignArray.count - 1
+                            self!.selectedLevelDesignIndex = self!.persistentData!.levelDesignArray.count - 1
                         } else { // else we will call errorSavingFile()
                             self!.errorSavingFile()
                         }
@@ -177,10 +183,8 @@ class LevelDesignViewController: UIViewController {
             style: UIAlertActionStyle.Default,
             handler: {[weak self]
                 (paramAction:UIAlertAction!) in
-                let name = self!.levelDesignArray[self!.selectedLevelDesignIndex!].getName()
-                let levelDesign = self!.makeLevelDesign(name)
-                self!.levelDesignArray[self!.selectedLevelDesignIndex!] = levelDesign
-                self!.saveLevelDesigns(self!.levelDesignArray)
+                self!.persistentData!.saveLevelDesign("dummyName", bubbleGrid: self!.bubbleGrid!,
+                    selectedLevelDesignIndex: self!.selectedLevelDesignIndex!)
             })
         
         // saveNewFile() is called to present another UIAlertController if user
@@ -210,7 +214,7 @@ class LevelDesignViewController: UIViewController {
             return false
         }
         
-        for levelDesign in levelDesignArray {
+        for levelDesign in persistentData!.levelDesignArray {
             if (levelDesign.getName() == name) {
                 return false
             }
@@ -296,35 +300,6 @@ class LevelDesignViewController: UIViewController {
         }
     }
     
-    // Makes a LevelDesign object with the current grid status, only gets called when user
-    // wants to save the current design
-    private func makeLevelDesign(name: String) -> LevelDesign {
-        var gameBubbleArray = [[GameBubble]]()
-        
-        for row in 0..<9 {
-            let even = (row % 2) == 0
-            var rowGameBubbleArray = [GameBubble]()
-            
-            for col in 0..<12 {
-                if (!even && col == 11) {
-                    break
-                }
-                
-                let bubbleView = bubbleGrid![row, col]
-                let bubbleXPosition = Int(bubbleView.frame.origin.x)
-                let bubbleYPosition = Int(bubbleView.frame.origin.y)
-                let bubbleColor = bubbleView.color
-                let basicBubble = BasicBubble(xPosition: bubbleXPosition,
-                    yPosition: bubbleYPosition, bubbleColor: bubbleColor)
-                rowGameBubbleArray.append(basicBubble)
-            }
-            gameBubbleArray.append(rowGameBubbleArray)
-        }
-        
-        let levelDesign = LevelDesign(name: name, gameBubbleArray: gameBubbleArray)
-        return levelDesign
-    }
-    
     // Loads a LevelDesign that the user has specified to load
     private func loadSelectedLevelDesign(selectedLevelDesign: LevelDesign) {
         let gameBubbleArray = selectedLevelDesign.getGameBubbleArray()
@@ -349,9 +324,7 @@ class LevelDesignViewController: UIViewController {
         // Passes the array of saved level designs to LevelDesignTableViewController if Load button is pressed
         if (segue.identifier == "load") {
             let vc = segue.destinationViewController as! LevelDesignTableViewController
-            if let levelDesignsArray = loadLevelDesigns() {
-                vc.levelDesignsArray = levelDesignsArray
-            }
+            vc.levelDesignsArray = persistentData!.loadLevelDesignArray()
         }
         if (segue.identifier == "start") {
             let vc = segue.destinationViewController as! GameViewController
@@ -367,19 +340,6 @@ class LevelDesignViewController: UIViewController {
             loadSelectedLevelDesign(selectedLevelDesign)
             isLoadedLevelDesign = true
         }
-    }
-    
-    // MARK: NSCoding
-    
-    private func saveLevelDesigns(levelDesignArray: [LevelDesign]) {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(levelDesignArray, toFile: LevelDesign.ArchiveURL.path!)
-        if (!isSuccessfulSave) {
-            print("Failed to save level design...")
-        }
-    }
-    
-    private func loadLevelDesigns() -> [LevelDesign]? {
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(LevelDesign.ArchiveURL.path!) as? [LevelDesign]
     }
 }
 

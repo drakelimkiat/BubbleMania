@@ -43,7 +43,7 @@ class BubbleGrid {
             let currentBubbleView = unvisitedBubbles.removeLast()
             var neighbouringBubbles = [BubbleView]()
             
-            if (currentBubbleView.color == "empty") {
+            if (currentBubbleView.color == Constants.bubbleColorString.empty) {
                 continue
             }
             

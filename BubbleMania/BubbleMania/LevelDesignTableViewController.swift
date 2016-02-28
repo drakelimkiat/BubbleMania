@@ -113,5 +113,31 @@ class LevelDesignTableViewController: UITableViewController {
                 selectedLevelDesign = levelDesignsArray![selectedIndexPath.row]
             }
         }
+        
+        if let segueIdentity = segue.identifier {
+            let preloadedLevels = PreloadedLevels(gameAreaWidth: self.view.frame.size.width)
+            
+            switch segueIdentity {
+                
+            case "easy":
+                let bubbleGrid = preloadedLevels.getEasyLevel()
+                let vc = segue.destinationViewController as! GameViewController
+                vc.bubbleGrid = bubbleGrid
+                
+            case "medium":
+                let bubbleGrid = preloadedLevels.getMediumLevel()
+                let vc = segue.destinationViewController as! GameViewController
+                vc.bubbleGrid = bubbleGrid
+                
+            case "hard":
+                let bubbleGrid = preloadedLevels.getHardLevel()
+                let vc = segue.destinationViewController as! GameViewController
+                vc.bubbleGrid = bubbleGrid
+                
+            default:
+                break
+                
+            }
+        }
     }
 }

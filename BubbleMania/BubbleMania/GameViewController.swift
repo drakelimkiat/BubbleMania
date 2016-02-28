@@ -38,12 +38,8 @@ class GameViewController: UIViewController {
         // Adding the first frame of UIView
         renderer = Renderer(bubbleGrid: bubbleGrid!, gameAreaFrame: gameArea.frame)
         currentView = renderer!.render()
-        self.view.addSubview(currentView!)
-        self.view.bringSubviewToFront(gameCannon)
-        self.view.bringSubviewToFront(cannonBase)
-        self.view.bringSubviewToFront(projectileBubble!)
-        self.view.bringSubviewToFront(nextBubbleView)
-        self.view.bringSubviewToFront(nextProjectileBubble!)
+        gameArea.addSubview(currentView!)
+        self.view.sendSubviewToBack(gameArea)
         
         // Timer that will be called every 1/60 seconds to update the UIView
         let _ = NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: "getNewView", userInfo: nil, repeats: true)
@@ -113,7 +109,7 @@ class GameViewController: UIViewController {
             projectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
             
             let x = nextBubbleView.frame.size.width / 2 - bubbleDiameter! / 2
-            let y = CGFloat(45)
+            let y = CGFloat(0)
             
             let bubblePoint = CGPoint(x: x, y: y)
             let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
@@ -172,13 +168,20 @@ class GameViewController: UIViewController {
         // Update the UIView with the new properties
         renderer!.updateRendererProperties(bubbleGrid!, projectileBubble: projectileBubble!, bubbleIsLaunched: bubbleIsLaunched, bubblesToRemove: bubblesToRemove)
         currentView = renderer!.render()
-        self.view.addSubview(currentView!)
-        self.view.bringSubviewToFront(gameCannon)
-        self.view.bringSubviewToFront(cannonBase)
-        self.view.bringSubviewToFront(nextBubbleView)
-        self.view.bringSubviewToFront(nextProjectileBubble!)
-        if let projectileBubble = projectileBubble {
-            self.view.bringSubviewToFront(projectileBubble)
+        gameArea.addSubview(currentView!)
+        self.view.sendSubviewToBack(gameArea)
+    }
+    
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        // save the presenting ViewController
+        let presentingViewController = self.presentingViewController
+        
+        if let presentingViewController = presentingViewController as? LevelDesignViewController {
+            self.dismissViewControllerAnimated(true) {
+                presentingViewController.viewDidLoad()
+            }
+        } else {
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
