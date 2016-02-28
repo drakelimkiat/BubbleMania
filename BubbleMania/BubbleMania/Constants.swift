@@ -6,7 +6,6 @@
 //  Copyright © 2016 NUS CS3217. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 struct Constants {
@@ -26,7 +25,4 @@ struct Constants {
         static let green = "green"
         static let empty = "empty"
     }
-    
-    
-    
 }

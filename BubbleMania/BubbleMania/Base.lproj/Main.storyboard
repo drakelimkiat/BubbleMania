@@ -176,6 +176,17 @@
                                 <rect key="frame" x="324" y="975" width="120" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04Y-bX-Jyf">
+                                <rect key="frame" x="0.0" y="900" width="120" height="120"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Next Bubble:" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A0A-53-74S">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -187,6 +198,7 @@
                         <outlet property="cannonBase" destination="AQc-ZI-Ubs" id="MKq-TI-uLc"/>
                         <outlet property="gameArea" destination="Lq3-6F-vHe" id="9DH-19-Y1R"/>
                         <outlet property="gameCannon" destination="Y56-z9-tEW" id="wiJ-fz-Hb4"/>
+                        <outlet property="nextBubbleView" destination="04Y-bX-Jyf" id="vGm-gY-1bw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHy-im-cfs" userLabel="First Responder" sceneMemberID="firstResponder"/>

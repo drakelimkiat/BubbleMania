@@ -13,8 +13,10 @@ class GameViewController: UIViewController {
     @IBOutlet weak var gameArea: UIView!
     @IBOutlet weak var gameCannon: UIView!
     @IBOutlet weak var cannonBase: UIView!
+    @IBOutlet weak var nextBubbleView: UIView!
     var bubbleGrid: BubbleGrid?
     var projectileBubble: ProjectileBubbleView?
+    var nextProjectileBubble: ProjectileBubbleView?
     var projectileBubbleAngle = CGFloat(0)
     var bubbleIsLaunched = false
     var gameEngine: GameEngine?
@@ -30,8 +32,8 @@ class GameViewController: UIViewController {
         // Setting up cannon view, and class properties
         bubbleDiameter = gameArea.frame.size.width / Constants.numbers.maxNumOfBubblesInRow
         setUpCannon()
-        addNewProjectileBubble()
         gameEngine = GameEngine(gameAreaWidth: gameArea.frame.size.width, gameAreaHeight: gameArea.frame.size.height, bubbleGrid: bubbleGrid!, bubbleDiameter: bubbleDiameter!)
+        addNewProjectileBubble()
         
         // Adding the first frame of UIView
         renderer = Renderer(bubbleGrid: bubbleGrid!, gameAreaFrame: gameArea.frame)
@@ -40,6 +42,8 @@ class GameViewController: UIViewController {
         self.view.bringSubviewToFront(gameCannon)
         self.view.bringSubviewToFront(cannonBase)
         self.view.bringSubviewToFront(projectileBubble!)
+        self.view.bringSubviewToFront(nextBubbleView)
+        self.view.bringSubviewToFront(nextProjectileBubble!)
         
         // Timer that will be called every 1/60 seconds to update the UIView
         let _ = NSTimer.scheduledTimerWithTimeInterval(1/60, target: self, selector: "getNewView", userInfo: nil, repeats: true)
@@ -99,8 +103,30 @@ class GameViewController: UIViewController {
         let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
         let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
         let projectileBubbleView = ProjectileBubbleView(frame: bubbleRect)
+        var projectileBubbleColor: String
         
-        projectileBubbleView.setBubbleColor("green")
+        if let nextProjectileBubble = nextProjectileBubble {
+            projectileBubbleColor = nextProjectileBubble.color
+            let nextProjectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
+            nextProjectileBubble.setBubbleColor(nextProjectileBubbleColor)
+        } else {
+            projectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
+            
+            let x = nextBubbleView.frame.size.width / 2 - bubbleDiameter! / 2
+            let y = CGFloat(45)
+            
+            let bubblePoint = CGPoint(x: x, y: y)
+            let bubbleSize = CGSize(width: intBubbleDiameter, height: intBubbleDiameter)
+            let bubbleRect = CGRect(origin: bubblePoint, size: bubbleSize)
+            let nextProjectileBubbleView = ProjectileBubbleView(frame: bubbleRect)
+            let nextProjectileBubbleColor = gameEngine!.getNextProjectileBubbleColor()
+            
+            nextProjectileBubbleView.setBubbleColor(nextProjectileBubbleColor)
+            nextBubbleView.addSubview(nextProjectileBubbleView)
+            nextProjectileBubble = nextProjectileBubbleView
+        }
+        
+        projectileBubbleView.setBubbleColor(projectileBubbleColor)
         self.view.addSubview(projectileBubbleView)
         projectileBubble = projectileBubbleView
     }
@@ -140,7 +166,7 @@ class GameViewController: UIViewController {
         }
         
         if (!bubblesToRemove.isEmpty) {
-            gameEngine!.removeBubblesFromArray(bubblesToRemove)
+            gameEngine!.removeBubblesFromGrid(bubblesToRemove)
         }
         
         // Update the UIView with the new properties
@@ -149,6 +175,8 @@ class GameViewController: UIViewController {
         self.view.addSubview(currentView!)
         self.view.bringSubviewToFront(gameCannon)
         self.view.bringSubviewToFront(cannonBase)
+        self.view.bringSubviewToFront(nextBubbleView)
+        self.view.bringSubviewToFront(nextProjectileBubble!)
         if let projectileBubble = projectileBubble {
             self.view.bringSubviewToFront(projectileBubble)
         }

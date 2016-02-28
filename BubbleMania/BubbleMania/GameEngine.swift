@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Darwin
 
 class GameEngine {
     
@@ -20,6 +21,29 @@ class GameEngine {
             floor: gameAreaHeight)
         self.bubbleGrid = bubbleGrid
         self.bubbleDiameter = bubbleDiameter
+    }
+    
+    func getNextProjectileBubbleColor() -> String {
+        var colorArray = [String]()
+        let bubbleViewArray = bubbleGrid.bubbleViewArray
+        
+        for bubbleViewRow in bubbleViewArray {
+            for bubbleView in bubbleViewRow {
+                if (bubbleView.color != Constants.bubbleColorString.empty) {
+                    colorArray.append(bubbleView.color)
+                }
+            }
+        }
+        
+        let randomColor: String
+        
+        if (colorArray.count == 0) {
+            randomColor = Constants.bubbleColorString.empty
+        } else {
+            randomColor = colorArray[Int(arc4random_uniform(UInt32(colorArray.count)))]
+        }
+        
+        return randomColor
     }
     
     // Uses the physicsEngine to calculate next position
@@ -51,7 +75,7 @@ class GameEngine {
         for bubbleViewRow in bubbleViewArray {
             for bubbleView in bubbleViewRow {
                 
-                if (bubbleView.color != "empty") {
+                if (bubbleView.color != Constants.bubbleColorString.empty) {
                     let bubbleViewX = Double(bubbleView.frame.origin.x + radius)
                     let bubbleViewY = Double(bubbleView.frame.origin.y + radius)
                     let projectileBubbleViewX = Double(projectileBubble.xPosition + radius)
@@ -83,7 +107,7 @@ class GameEngine {
         var rowCount = bubbleViewArray.count
         
         while (row >= rowCount) {
-            let bubbleViewRow = addNewRow(rowCount - 1)
+            let bubbleViewRow = addNewRow(row)
             bubbleViewArray.append(bubbleViewRow)
             rowCount++
         }
@@ -123,8 +147,8 @@ class GameEngine {
         return bubbleArray
     }
     
-    // "Removes" a bubble from BubbleViewArray by setting the color as "empty"
-    func removeBubblesFromArray(bubbleArray: [BubbleView]) {
+    // "Removes" a bubble from BubbleGrid by setting the color as "empty"
+    func removeBubblesFromGrid(bubbleArray: [BubbleView]) {
         let bubbleViewArray = bubbleGrid.bubbleViewArray
         
         for bubble in bubbleArray {
